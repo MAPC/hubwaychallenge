@@ -41,7 +41,7 @@ function(data) {
 			<p>You can execute queries by using <a href="https://docs.djangoproject.com/en/1.4/ref/models/querysets/#field-lookups">Django field lookup arguments</a>.</p>
 <pre><code class="javascript">// Example: returns a GeoJSON object for Hubway Stations containing the term "Conway Park" in their name
 
-"http://hubwaydatachallenge.org/station/api/v1/?format=json{{ auth_string }}&name__icontains=Conway Park"
+"http://hubwaydatachallenge.org/api/v1/station/?format=json{{ auth_string }}&name__icontains=Conway Park"
 
 // Or with jQuery:
 $.getJSON("http://hubwaydatachallenge.org/api/v1/station",
