@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Register | {{ block.super }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ STATIC_URL }}social-signin-buttons/auth-buttons.css">
+{% endblock %}
+
+
+{% block content %}
+	<article>
+    	<section>
+    		<h2>Register</h2>
+    		<p>Register your existing account on one of the sites below to get access to our <span class="highgreen">Data API</span>.</p>
+    		<p><a class="btn-auth btn-facebook" href="{% url socialauth_begin 'facebook' %}">Sign in with <b>Facebook</b></a></p>
+            <p><a class="btn-auth btn-twitter" href="{% url socialauth_begin 'twitter' %}">Sign in with <b>Twitter</b></a></p>
+            <p><a class="btn-auth btn-google" href="{% url socialauth_begin 'google-oauth2' %}">Sign in with <b>Google</b></a></p>
+            <p><a class="btn-auth btn-github" href="{% url socialauth_begin 'github' %}">Sign in with <b>GitHub</b></a></p>
+    	</section>
+    </article>
+    <aside>
+	    <h3>Get started!</h3>
+	    <p><a class="btn dl" title="13MB, trips and stations as CSV and Shapefile." href="http://files.hubwaychallenge.org/stations_trips.zip"> Download the Data </a><span class="help-text">10MB zipped CSV files and Shapefile.</p>
+	    <h3>Join us for a hack day!</h3>
+	    <p>Want to get out of the house and work with some friends? Come to the <a class="highgreen" href="http://hubwaydatachallenge.eventbrite.com">Hack Day at The Bocoup Loft in Downtown Boston on Saturday, October 27</a>.</p>
+	</aside>
+{% endblock %}

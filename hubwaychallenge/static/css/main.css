@@ -1,0 +1,181 @@
+
+/* ===================
+    Hubway  Theme
+   =================== */
+
+body {
+	font-family: 'Lato', sans-serif;
+	background-image: url('../img/bg.png')
+}
+
+h1 {
+	font-weight: 300;
+	font-size: 3em;
+}
+
+h2, h3 {
+	font-weight: 400;
+	text-shadow: 0px 1px 1px rgba(77, 77, 77, 0.4);
+}
+
+a {
+	color: #00467F;
+}
+
+.title {
+    color: white;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+    margin-top: 0.4em;
+    line-height: 1.3em;   
+}
+
+section h2 {
+	margin-top: 1.4em;
+}
+
+article, .main aside {
+	color: #4d4d4d;
+}
+
+.main aside {
+    border: none;
+    background-color: #f7f6f4;
+    margin-top: 20px;
+}
+
+.main article {
+	padding: 0 30px;
+}
+
+aside h3 {
+	color: #49aa43;
+}
+
+article header {
+	font-size: 1.4em;
+	line-height: 1.4em;
+	background: url("../img/bg_article_header.png") no-repeat bottom center;
+	padding-bottom: 20px;
+	margin-bottom: 30px;
+}
+
+article header ul {
+	line-height: 1.8em;
+	list-style-image: url("../img/arrow-bullet.png")
+}
+
+.footer-container footer {
+	text-align: center;
+	background: white url("../img/bg_article_footer.png") repeat-x 3px top;
+	color: #4d4d4d;
+}
+
+footer img {
+	margin: 10px;
+}
+
+.footer-container {
+	background: none;
+	border-top: none;
+}
+
+.highgreen, dt {
+	font-weight: 700;
+	color: #49aa43;
+}
+
+.main.wrapper {
+	background-color: white;
+	background: white url('../img/map.jpg') top center no-repeat;
+	padding-top: 110px;
+}
+
+.header-container {
+    border-bottom: 20px solid #268c26;
+}
+
+.header-container {
+    background: #49aa43;
+}
+
+header.wrapper img {
+	float: left;
+	margin: 1.1em;
+}
+
+dd {
+	margin-left: 0px;
+	margin-bottom: 10px;
+}
+
+dd img.headshot {
+	float: left;
+	padding-top: 4px;
+	margin-right: 10px;
+}
+
+dl.judges dd:last-child {
+	margin-bottom: 100px;
+}
+
+a.btn.dl {
+	display: block; 
+	width: 155px; 
+	height: 43px; 
+	background: url(../img/btn_dl.png) no-repeat top left; 
+	line-height: 43px;
+	padding-left: 45px;
+	overflow: hidden;
+	color: white;
+	text-decoration: none;
+}
+
+.help-text {
+	font-size: 0.8em;
+	text-shadow: none;
+}
+
+nav a {
+    background: #268c26;
+}
+
+ul.socialmedia { 
+	list-style: none;
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+
+ul.socialmedia li {
+	margin-right: 10px;
+	width: 100px;
+	display: inline-block;
+}
+
+/*** Media Queries ***/
+
+@media only screen and (min-width: 768px) {
+
+	.main aside {
+        width: 24%;
+    }
+
+    nav {
+        width: 5%;
+    }
+	nav ul {
+	    float: right;
+	}
+	nav a {
+        width: 100%;
+        padding: 6px;
+    }
+
+}
+
+@media only screen and (min-width: 480px) {
+
+    nav a {
+        padding:6px;
+    }
+}

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Data API | {{ block.super }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ STATIC_URL }}highlightjs/styles/github.css">
+<script src="{{ STATIC_URL }}highlightjs/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{% endblock %}
+
+{% block content %}
+
+	{% with "&username="|add:apikey.user.username|add:"&api_key="|add:apikey.key as auth_string %}
+
+	<article>
+    	<section>
+    		<h2>Data API</h2>
+    		<p>You can access and query all available data through our discoverable <a class="highgreen" href="/api/v1/?format=json{{ auth_string }}" title="Data API">Data API</a>. To get access you need to send your <i>username</i> and <i>apikey</i> along with your request.</p>
+    		<dl>
+		    	<dt>API URL</dt>
+		    	<dd>http://hubwaydatachallenge.org/api/v1/</dd>
+	            <dt>username</dt>
+	            <dd>{{ apikey.user.username }}</dd>
+	            <dt>apikey</dt>
+	            <dd>{{ apikey.key }}</dd>
+	        </dl>
+<pre><code class="javascript">// Example: return a GeoJSON object for Hubway stations
+
+"http://hubwaydatachallenge.org/api/v1/station/?format=json{{ auth_string }}"
+
+// Or with jQuery:
+$.getJSON("http://hubwaydatachallenge.org/api/v1/station",
+{
+  format: "json",
+  username: "{{ apikey.user.username }}",
+  apikey: "{{ apikey.key }}"
+},
+function(data) {
+  ...
+});</code></pre>
+			<p>You can execute queries by using <a href="https://docs.djangoproject.com/en/1.4/ref/models/querysets/#field-lookups">Django field lookup arguments</a>.</p>
+<pre><code class="javascript">// Example: returns a GeoJSON object for Hubway Stations containing the term "Conway Park" in their name
+
+"http://hubwaydatachallenge.org/station/api/v1/?format=json{{ auth_string }}&name__icontains=Conway Park"
+
+// Or with jQuery:
+$.getJSON("http://hubwaydatachallenge.org/api/v1/station",
+{
+  format: "json",
+  username: "{{ apikey.user.username }}",
+  apikey: "{{ apikey.key }}",
+  name__icontains: "Conway Park"
+},
+function(data) {
+  ...
+});</code></pre>
+    	</section>
+    </article>
+
+
+    {% endwith %}
+    <aside>
+	    <h3>Get started!</h3>
+	    <p><a class="btn dl" title="13MB, trips and stations as CSV and Shapefile." href="http://files.hubwaychallenge.org/stations_trips.zip"> Download the Data </a><span class="help-text">10MB zipped CSV files and Shapefile.</p>
+	    <h3>Join us for a hack day!</h3>
+	    <p>Want to get out of the house and work with some friends? Come to the <a class="highgreen" href="http://hubwaydatachallenge.eventbrite.com">Hack Day at The Bocoup Loft in Downtown Boston on Saturday, October 27</a>.</p>
+	</aside>
+{% endblock %}

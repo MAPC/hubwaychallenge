@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Not found{% endblock %} 
+
+{% block content %}
+<article>
+	<section>  
+		<h2>Not found</h2>
+		<p>We're sorry but the page: <b>{{ request_path }}</b> isn't available here.</p>
+	</section>
+</article>
+{% endblock %}

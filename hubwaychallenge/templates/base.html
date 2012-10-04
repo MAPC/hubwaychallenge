@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{% block title %}Hubway Data Visualization Challenge{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+
+        <link rel="stylesheet" href="{{ STATIC_URL }}initializr/css/normalize.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}initializr/css/main.css">
+
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
+
+        <script src="{{ STATIC_URL }}initializr/js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+
+        {% block extra_head %}{% endblock %}
+
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+
+        <div class="header-container">
+            <header class="wrapper clearfix">
+                <a href="/" title="Hubway Data Visualization Challenge">
+                <img src="{{ STATIC_URL }}img/hubway_logo_green.png" >
+                <h1 class="title">Hubway Data<br>Visualization Challenge</h1>
+                </a>
+                <nav>
+                    <ul>
+                        <li>{% if user.is_authenticated %}<a href="{% url logout %}">Logout</a>{% endif %}</li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+
+        <div class="main-container">
+            <div class="main wrapper clearfix">
+                {% block content %}{% endblock %}
+            </div> <!-- #main -->
+        </div> <!-- #main-container -->
+
+        <div class="footer-container">
+            <footer class="wrapper">
+                <p>
+                    <a href="http://www.mapc.org" title="Metropolitan Area Planning Council"><img src="{{ STATIC_URL }}img/mapc-logo.png" alt="Metropolitan Area Planning Council"></a>
+                    <a href="http://www.thehubway.com/" title="Hubway"><img src="{{ STATIC_URL }}img/hubway-logo.png" alt="Hubway"></a>
+                </p>
+                <p class="help-text">&copy; 2012 MAPC</p>
+            </footer>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}initializr/js/vendor/jquery-1.8.1.min.js"><\/script>')</script>
+
+        <script src="{{ STATIC_URL }}initializr/js/main.js"></script>
+
+        <script>
+            var _gaq=[['_setAccount','UA-5547782-18'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+
+        <script type="text/javascript">
+          var uvOptions = {};
+          (function() {
+            var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+            uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/RwnQW0JdG6DjzW35X8cXIA.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+          })();
+        </script>
+
+    </body>
+</html>
