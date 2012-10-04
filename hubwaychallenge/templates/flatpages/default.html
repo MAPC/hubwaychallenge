@@ -12,7 +12,7 @@
     </article>
     <aside>
 	    <h3>Get started!</h3>
-	    <p><a class="btn dl" title="13MB, trips and stations as CSV and Shapefile." href="http://files.hubwaydatachallenge.org/stations_trips.zip"> Download the Data </a><span class="help-text">10MB zipped CSV files and Shapefile, or {% if user.is_authenticated %}use{% else %}<a href="/register">register</a> for using{% endif %} our <a class="highgreen" href="{% if user.is_authenticated %}{% url data-api %}{% else %}/register{% endif %}" title="Data API">Data API</a>.</span></p>
+	    <p><a class="btn dl" title="13MB, trips and stations as CSV and Shapefile." href="http://files.hubwaydatachallenge.org/stations_trips.zip"> Download the Data </a><span class="help-text">10MB zipped CSV files and Shapefile, or {% if user.is_authenticated %}use{% else %}<a href="/register">register</a> to use{% endif %} our <a class="highgreen" href="{% if user.is_authenticated %}{% url data-api %}{% else %}/register{% endif %}" title="Data API">Data API</a>.</span></p>
 	    <h3>Join us for a hack day!</h3>
 	    <p>Want to get out of the house and work with some friends? Come to the <a class="highgreen" href="http://hubwaydatachallenge.eventbrite.com">Hack Day at The Bocoup Loft in Downtown Boston on Saturday, October 27</a>.</p>
 	</aside>
