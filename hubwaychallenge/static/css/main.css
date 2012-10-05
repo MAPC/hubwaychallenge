@@ -141,15 +141,6 @@ nav a {
 
 ul.socialmedia { 
 	list-style: none;
-	text-align: center;
-	margin-top: 0px;
-	margin-bottom: 10px;
-}
-
-ul.socialmedia li {
-	margin-right: 10px;
-	width: 100px;
-	display: inline-block;
 }
 
 /*** Media Queries ***/

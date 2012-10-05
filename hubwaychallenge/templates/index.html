@@ -1,5 +1,43 @@
 {% extends "base.html" %}
 
+{% block fb_code %}
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '265086433612349', // App ID
+      channelUrl : '//www.hubwaydatachallenge.org/channel.html', // Channel File
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
+    FB.Event.subscribe('edge.create', function(targetUrl) {
+      _gaq.push(['_trackSocial', 'facebook', 'like', targetUrl]);
+    });
+    FB.Event.subscribe('edge.remove', function(targetUrl) {
+      _gaq.push(['_trackSocial', 'facebook', 'unlike', targetUrl]);
+    });
+    FB.Event.subscribe('message.send', function(targetUrl) {
+      _gaq.push(['_trackSocial', 'facebook', 'send', targetUrl]);
+    });
+  };
+
+  // Load the SDK Asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     ref.parentNode.insertBefore(js, ref);
+   }(document));
+</script>
+
+
+
+{% endblock %}
+
+
+
 {% block content %}
 
 <article>
@@ -64,5 +102,52 @@
     </ul>
 
     <p>All entries will be exhibited on this website and top entries will be featured on the Hubway website. The winning entry will also be featured in the Greater Boston region's most widely-distributed data visualization publication, the MAPC annual calendar. Stay tuned for details!</p>
+    <h3>Share with your friends!</h3>
+    <ul class="socialmedia">
+        <li><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://hubwaydatachallenge.org" data-text="Ever wanted to explore and visualize half a million bike trips? Well, there you go!" data-via="MAPCMetroBoston" data-hashtags="hubwayviz">Tweet</a>
+        <script type="text/javascript" charset="utf-8">
+            window.twttr = (function (d,s,id) {
+              var t, js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+              js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+              return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+            }(document, "script", "twitter-wjs"));
+            function extractParamFromUri(uri, paramName) {
+              if (!uri) {
+                return;
+              }
+              var regex = new RegExp('[\\?&#]' + paramName + '=([^&#]*)');
+              var params = regex.exec(uri);
+              if (params != null) {
+                return unescape(params[1]);
+              }
+              return;
+            }
+            function trackTwitter(intent_event) {
+                if (intent_event) {
+                  var opt_pagePath;
+                  if (intent_event.target && intent_event.target.nodeName == 'IFRAME') {
+                        opt_target = extractParamFromUri(intent_event.target.src, 'url');
+                  }
+                  _gaq.push(['_trackSocial', 'twitter', 'tweet', opt_pagePath]);
+                }
+            }
+            //Wrap event bindings - Wait for async js to load
+            twttr.ready(function (twttr) {
+                //event bindings
+                twttr.events.bind('tweet', trackTwitter);
+            });
+            // Twitter API 'Tweet' button tracking
+        </script></li>
+        <li><div class="fb-like" data-href="http://hubwaydatachallenge.org/" data-send="false" data-layout="button_count" data-width="200" data-show-faces="false"></div></li>
+        <li><div class="g-plusone" data-size="medium"></div>
+        <script type="text/javascript">
+          (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+          })();
+        </script></li>
+    </ul>
 </aside>
 {% endblock %}
