@@ -4,8 +4,12 @@
 
 {% block extra_head %}
 <link rel="stylesheet" href="{{ STATIC_URL }}highlightjs/styles/github.css">
-<script src="{{ STATIC_URL }}highlightjs/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
+ <!--[if lte IE 8]>
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.ie.css" />
+ <![endif]-->
+ <style>#map { height: 300px; }</style>
+
 {% endblock %}
 
 {% block content %}
@@ -15,45 +19,428 @@
 	<article>
     	<section>
     		<h2>Data API</h2>
-    		<p>You can access and query all available data through our discoverable <a class="highgreen" href="/api/v1/?format=json{{ auth_string }}" title="Data API">Data API</a>. To get access you need to send your <i>username</i> and <i>apikey</i> along with your request.</p>
-    		<dl>
-		    	<dt>API URL</dt>
-		    	<dd>http://hubwaydatachallenge.org/api/v1/</dd>
-	            <dt>username</dt>
-	            <dd>{{ apikey.user.username }}</dd>
-	            <dt>apikey</dt>
-	            <dd>{{ apikey.key }}</dd>
-	        </dl>
-<pre><code class="javascript">// Example: return a GeoJSON object for Hubway stations
 
-"http://hubwaydatachallenge.org/api/v1/station/?format=json{{ auth_string }}"
+    		<p>You can access and query all available data through our <a class="highgreen" href="/api/v1/?format=json" title="Data API">discoverable Data API</a>. Going to ...</p>
 
-// Or with jQuery:
-$.getJSON("http://hubwaydatachallenge.org/api/v1/station",
-{
-  format: "json",
-  username: "{{ apikey.user.username }}",
-  apikey: "{{ apikey.key }}"
-},
-function(data) {
-  ...
+<pre><code>http://hubwaydatachallenge.org/api/v1/station/?format=json</code></pre> 
+
+        <p>... returns a JSON object with endpoints for resource schemas and resource collections:</p>
+
+<pre><code class="json">{
+    "station": {
+        "list_endpoint": "/api/v1/station/",
+        "schema": "/api/v1/station/schema/"
+    },
+    "trip": {
+        "list_endpoint": "/api/v1/trip/",
+        "schema": "/api/v1/trip/schema/"
+    }
+}</code></pre>
+
+        <h3>Accessing the Data API</h3>
+
+        <p>To get access to resource collections and details, you need to pass your <b>username</b> and <b>apikey</b> as parameters along with your request.</p>
+    		<dl class="api">
+            <dt>API URL</dt>
+            <dd>http://hubwaydatachallenge.org/api/v1/</dd>
+            <dt>username</dt>
+            <dd>{{ apikey.user.username }}</dd>
+            <dt>apikey</dt>
+            <dd>{{ apikey.key }}</dd>
+        </dl>
+        <p>Going to ...</p>
+<pre><code>http://hubwaydatachallenge.org/api/v1/station/?format=json{{ auth_string }}</code></pre>
+        <p>... returns a colletion of station resources.</p>
+
+<pre><code class="json">{
+    "meta": {
+        "limit": 100,
+        "next": null,
+        "offset": 0,
+        "previous": null,
+        "total_count": 95
+    },
+    "objects": [
+        {
+            "id": 3,
+            "installdate": null,
+            "installed": true,
+            "locked": false,
+            "name": "Colleges of the Fenway",
+            "point": {
+                "coordinates": [
+                    -71.100812000000005,
+                    42.340021
+                ],
+                "type": "Point"
+            },
+            "removaldate": null,
+            "resource_uri": "/api/v1/station/3/",
+            "temporary": false,
+            "terminalname": "B32006"
+        },
+        ...
+    ]
+}</code></pre>
+
+        <p>Collections are currently limited to 100 results per request. The result metadata contains information about total number of result, offset, next and previous collection result page.</p>
+
+        <h3>Querying the API</h3>
+
+        <p>The API is built using <a href="https://github.com/toastdriven/django-tastypie">django-tastypie</a> and you can execute queries and filter resources by using <a href="https://docs.djangoproject.com/en/1.4/ref/models/querysets/#field-lookups">Django field lookup parameters</a>.</p>
+
+        <h4>Example queries</h4>
+
+        <p>Stations with the term "Conway Park" in their name:</p>
+<pre><code>http://hubwaydatachallenge.org/api/v1/station/?format=json{{ auth_string }}&name__icontains=Conway Park</code></pre>
+
+        <p>Details for Station Nr 71:</p>
+<pre><code>http://hubwaydatachallenge.org/api/v1/station/71/?format=json{{ auth_string }}</code></pre>
+
+        <p>Collection for Stations 71, 6 and 22:
+<pre><code>http://hubwaydatachallenge.org/api/v1/station/set/71;6;22/?format=json{{ auth_string }}</code></pre>
+
+        <p>All trips longer than an hour:</p>
+<pre><code>http://hubwaydatachallenge.org/api/v1/trip/?format=json{{ auth_string }}&duration__gt=3600</code></pre>
+
+        <p>All trips longer than an hour departing from Station Nr 33:</p>
+<pre><code>http://hubwaydatachallenge.org/api/v1/trip/?format=json{{ auth_string }}&duration__gt=3600&start_station=33</code></pre>
+
+        <p>All trips longer than an hour departing from Station Nr 33 in August 2011:</p>
+<pre><code>http://hubwaydatachallenge.org/api/v1/trip/?format=json{{ auth_string }}&duration__gt=3600&start_station=33&start_date__gte=2011-08-01&end_date__lte=2011-08-31</code></pre>
+
+        <h3>Data schemas</h3>
+
+        <p>You can explore data schemas by interacting with the API and following the resource schema endpoints.</p>
+
+        <p><a href="http://hubwaydatachallenge.org/api/v1/station/schema/?format=json{{ auth_string }}" class="highgreen">Station schema:</a></p>
+<pre><code class="json">{
+    "allowed_detail_http_methods": [
+        "get"
+    ],
+    "allowed_list_http_methods": [
+        "get"
+    ],
+    "default_format": "application/json",
+    "default_limit": 100,
+    "fields": {
+        "id": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Integer data. Ex: 2673",
+            "nullable": false,
+            "readonly": false,
+            "type": "integer",
+            "unique": true
+        },
+        "installdate": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "A date & time as a string. Ex: \"2010-11-10T03:07:43\"",
+            "nullable": true,
+            "readonly": false,
+            "type": "datetime",
+            "unique": false
+        },
+        "installed": {
+            "blank": true,
+            "default": false,
+            "help_text": "Boolean data. Ex: True",
+            "nullable": false,
+            "readonly": false,
+            "type": "boolean",
+            "unique": false
+        },
+        "locked": {
+            "blank": true,
+            "default": false,
+            "help_text": "Boolean data. Ex: True",
+            "nullable": false,
+            "readonly": false,
+            "type": "boolean",
+            "unique": false
+        },
+        "name": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Unicode string data. Ex: \"Hello World\"",
+            "nullable": false,
+            "readonly": false,
+            "type": "string",
+            "unique": false
+        },
+        "point": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Geometry data.",
+            "nullable": true,
+            "readonly": false,
+            "type": "geometry",
+            "unique": false
+        },
+        "removaldate": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "A date & time as a string. Ex: \"2010-11-10T03:07:43\"",
+            "nullable": true,
+            "readonly": false,
+            "type": "datetime",
+            "unique": false
+        },
+        "resource_uri": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Unicode string data. Ex: \"Hello World\"",
+            "nullable": false,
+            "readonly": true,
+            "type": "string",
+            "unique": false
+        },
+        "temporary": {
+            "blank": true,
+            "default": false,
+            "help_text": "Boolean data. Ex: True",
+            "nullable": false,
+            "readonly": false,
+            "type": "boolean",
+            "unique": false
+        },
+        "terminalname": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Unicode string data. Ex: \"Hello World\"",
+            "nullable": false,
+            "readonly": false,
+            "type": "string",
+            "unique": false
+        }
+    },
+    "filtering": {
+        "id": 1,
+        "installdate": 1,
+        "installed": 1,
+        "locked": 1,
+        "name": 1,
+        "removaldate": 1,
+        "temporary": 1,
+        "terminalname": 1
+    }
+}</code></pre>
+
+        <p><a href="http://hubwaydatachallenge.org/api/v1/trip/schema/?format=json{{ auth_string }}" class="highgreen">Trip schema:</a></p>
+<pre><code class="json">{
+    "allowed_detail_http_methods": [
+        "get"
+    ],
+    "allowed_list_http_methods": [
+        "get"
+    ],
+    "default_format": "application/json",
+    "default_limit": 100,
+    "fields": {
+        "bike_nr": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Unicode string data. Ex: \"Hello World\"",
+            "nullable": true,
+            "readonly": false,
+            "type": "string",
+            "unique": false
+        },
+        "birth_date": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Integer data. Ex: 2673",
+            "nullable": true,
+            "readonly": false,
+            "type": "integer",
+            "unique": false
+        },
+        "duration": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Integer data. Ex: 2673",
+            "nullable": true,
+            "readonly": false,
+            "type": "integer",
+            "unique": false
+        },
+        "end_date": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "A date & time as a string. Ex: \"2010-11-10T03:07:43\"",
+            "nullable": true,
+            "readonly": false,
+            "type": "datetime",
+            "unique": false
+        },
+        "end_station": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "A single related resource. Can be either a URI or set of nested resource data.",
+            "nullable": false,
+            "readonly": false,
+            "related_type": "to_one",
+            "type": "related",
+            "unique": false
+        },
+        "gender": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Unicode string data. Ex: \"Hello World\"",
+            "nullable": true,
+            "readonly": false,
+            "type": "string",
+            "unique": false
+        },
+        "id": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Integer data. Ex: 2673",
+            "nullable": false,
+            "readonly": false,
+            "type": "integer",
+            "unique": true
+        },
+        "resource_uri": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Unicode string data. Ex: \"Hello World\"",
+            "nullable": false,
+            "readonly": true,
+            "type": "string",
+            "unique": false
+        },
+        "start_date": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "A date & time as a string. Ex: \"2010-11-10T03:07:43\"",
+            "nullable": true,
+            "readonly": false,
+            "type": "datetime",
+            "unique": false
+        },
+        "start_station": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "A single related resource. Can be either a URI or set of nested resource data.",
+            "nullable": false,
+            "readonly": false,
+            "related_type": "to_one",
+            "type": "related",
+            "unique": false
+        },
+        "status": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Unicode string data. Ex: \"Hello World\"",
+            "nullable": true,
+            "readonly": false,
+            "type": "string",
+            "unique": false
+        },
+        "subscription_type": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Unicode string data. Ex: \"Hello World\"",
+            "nullable": true,
+            "readonly": false,
+            "type": "string",
+            "unique": false
+        },
+        "zip_code": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Unicode string data. Ex: \"Hello World\"",
+            "nullable": true,
+            "readonly": false,
+            "type": "string",
+            "unique": false
+        }
+    },
+    "filtering": {
+        "bike_nr": 1,
+        "birth_date": 1,
+        "duration": 1,
+        "end_date": 1,
+        "end_station": 1,
+        "gender": 1,
+        "id": 1,
+        "start_date": 1,
+        "start_station": 1,
+        "status": 1,
+        "subscription_type": 1,
+        "zip_code": 1
+    }
+}</code></pre>
+
+
+        <h3>Examples</h3>
+
+        <h4>Render Hubway stations on a <a href="http://leaflet.cloudmade.com/">Leaflet</a> map</h4>
+
+        <p>The following JavaScript code uses Leaflet in combination with jQuery to request all stations from the API, translate them into GeoJSON features and render them on a map.</p>
+
+<pre><code class="javascript">$(function() {
+  // initialize map
+  var map = new L.Map("map").setView([42.3598, -71.0851], 13);
+
+  // MAPC basemap, see https://gist.github.com/2923720
+  var layer = new L.MAPCTileLayer("basemap");
+  map.addLayer(layer);
+  
+  // add new GeoJSON layer
+  var stations = L.geoJson().addTo(map);
+  
+  // request stations
+  $.getJSON("http://hubwaydatachallenge.org/api/v1/station/?format=json&username={{ apikey.user.username }}&api_key={{ apikey.key }}", function(data) {
+      $.each(data.objects, function(key, station) {
+        // create GeoJSON feature for each station
+        var feature = {
+          "type": "Feature",
+          "properties": {
+            "id": station.id,
+            "name": station.name,
+            "terminalname": station.terminalname
+          },
+          "geometry": station.point
+        };
+        stations.addData(feature);
+      });
+  });
 });</code></pre>
-			<p>You can execute queries by using <a href="https://docs.djangoproject.com/en/1.4/ref/models/querysets/#field-lookups">Django field lookup arguments</a>.</p>
-<pre><code class="javascript">// Example: returns a GeoJSON object for Hubway Stations containing the term "Conway Park" in their name
+        <p>The resulting map:</p>
+        <div id="map"></div>
+        {% block extra_script %}
+        {{ block.super }}
+        <script src="{{ STATIC_URL }}highlightjs/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
+        <script type="text/javascript" src="http://tiles.mapc.org/layers.js"></script>
+        <script>
+          $(function() {
+            var map = new L.Map("map").setView([42.3598, -71.0851], 13);
+            var layer = new L.MAPCTileLayer("basemap");
+            map.addLayer(layer);
+            var stations = L.geoJson().addTo(map);
+            $.getJSON("http://hubwaydatachallenge.org/api/v1/station/?format=json&username={{ apikey.user.username }}&api_key={{ apikey.key }}", function(data) {
+                $.each(data.objects, function(key, station) {
+                  var feature = {
+                    "type": "Feature",
+                    "properties": {
+                      "id": station.id,
+                      "name": station.name,
+                      "terminalname": station.terminalname
+                    },
+                    "geometry": station.point
+                  };
+                  stations.addData(feature);
+                });
+            });
+          });
+        </script>
+        {% endblock %}
 
-"http://hubwaydatachallenge.org/api/v1/station/?format=json{{ auth_string }}&name__icontains=Conway Park"
-
-// Or with jQuery:
-$.getJSON("http://hubwaydatachallenge.org/api/v1/station",
-{
-  format: "json",
-  username: "{{ apikey.user.username }}",
-  apikey: "{{ apikey.key }}",
-  name__icontains: "Conway Park"
-},
-function(data) {
-  ...
-});</code></pre>
     	</section>
     </article>
 

@@ -147,6 +147,31 @@ ul.socialmedia {
 	list-style: none;
 }
 
+
+dl.api {
+	background-color: #F7F6F4;
+	padding: 20px;
+    -webkit-box-shadow: 0 5px 10px #aaa;
+       -moz-box-shadow: 0 5px 10px #aaa;
+            box-shadow: 0 5px 10px #aaa;
+}
+
+dl.api dt {
+	float: left;
+	width: 100px;
+	overflow: hidden;
+	clear: left;
+	white-space: nowrap;
+}
+
+dl.api dd {
+	margin-bottom: 0px;
+}
+
+code {
+	font-size: 0.9em;
+}
+
 /*** Media Queries ***/
 
 @media only screen and (min-width: 768px) {
