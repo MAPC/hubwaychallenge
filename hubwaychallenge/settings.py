@@ -190,9 +190,8 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/data-api/'
 LOGIN_ERROR_URL = '/login-error/'
 
-XS_SHARING_ALLOWED_ORIGINS = ''
+XS_SHARING_ALLOWED_ORIGINS = '*'
 XS_SHARING_ALLOWED_METHODS = ['GET']
-XS_SHARING_ALLOWED_HEADERS = []
 
 try:
     from local_settings import *
