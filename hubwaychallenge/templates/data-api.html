@@ -374,7 +374,6 @@
     }
 }</code></pre>
 
-
         <h3>Usage examples</h3>
 
         <h4>Render Hubway stations on a <a href="http://leaflet.cloudmade.com/">Leaflet</a> map</h4>
@@ -393,20 +392,26 @@
   var stations = L.geoJson().addTo(map);
   
   // request stations
-  $.getJSON("http://hubwaydatachallenge.org/api/v1/station/?format=json&username={{ apikey.user.username }}&api_key={{ apikey.key }}", function(data) {
-      $.each(data.objects, function(key, station) {
-        // create GeoJSON feature for each station
-        var feature = {
-          "type": "Feature",
-          "properties": {
-            "id": station.id,
-            "name": station.name,
-            "terminalname": station.terminalname
-          },
-          "geometry": station.point
-        };
-        stations.addData(feature);
-      });
+  $.getJSON("http://hubwaydatachallenge.org/api/v1/station/", 
+    {
+        "format": "json",
+        "username": "{{ apikey.user.username }}",
+        "api_key": "{{ apikey.key }}"
+    }, 
+    function(data) {
+        $.each(data.objects, function(key, station) {
+            // create GeoJSON feature for each station
+            var feature = {
+                "type": "Feature",
+                "properties": {
+                    "id": station.id,
+                    "name": station.name,
+                    "terminalname": station.terminalname
+                },
+                "geometry": station.point
+            };
+            stations.addData(feature);
+        });
   });
 });</code></pre>
         <p>The resulting map:</p>
@@ -423,7 +428,14 @@
             var layer = new L.MAPCTileLayer("basemap");
             map.addLayer(layer);
             var stations = L.geoJson().addTo(map);
-            $.getJSON("http://hubwaydatachallenge.org/api/v1/station/?format=json&username={{ apikey.user.username }}&api_key={{ apikey.key }}", function(data) {
+
+            $.getJSON("http://hubwaydatachallenge.org/api/v1/station/",
+                {
+                    "format": "json",
+                    "username": "{{ apikey.user.username }}",
+                    "api_key": "{{ apikey.key }}"
+                }, 
+                function(data) {
                 $.each(data.objects, function(key, station) {
                   var feature = {
                     "type": "Feature",
