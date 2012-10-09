@@ -3,12 +3,6 @@ from django.utils.translation import ugettext as _
 
 class Station(models.Model):
 
-    # -- IMPORT CSV DATA
-    # COPY data_station(id,terminalName,name,installed,locked,installDate,removalDate,temporary,lat,lng)
-    # FROM '/vagrant/hubwaychallenge/data/csv/stations.csv'
-    # DELIMITERS ','
-    # CSV HEADER;
-
     id = models.IntegerField(primary_key=True)
     terminalname = models.CharField(max_length=10)
     name = models.CharField(max_length=100)
@@ -34,18 +28,6 @@ class Station(models.Model):
     
 
 class Trip(models.Model):
-
-    # -- IMPORT CSV DATA
-    # COPY data_trip(id,status,duration,start_date,start_station_id,end_date,end_station_id,bike_nr,subscriber_id,subscription_type,zip_code,birth_date,gender)
-    # FROM '/vagrant/hubwaychallenge/data/csv/trips-db-import.csv'
-    # DELIMITERS ','
-    # CSV HEADER;
-
-    # replace 'nan' with ''
-    # perl -pi -e 's/nan//g' trips-dbimport_.csv 
-
-    # remove duplicate keys
-    # awk -F, '(!X[$1]) {X[$1]=1; print $0}' trips-dbimport_.csv > trips-dbimport__.csv 
 
     id = models.IntegerField(primary_key=True)
     status = models.CharField(max_length=20, null=True)
