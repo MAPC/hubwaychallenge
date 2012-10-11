@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Thank You! | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <article>
+        <section>
+            <h2>Thank You!</h2>
+            <p>Thank you for participating and submitting your visualization.</p>
+            <p>It'll appear shortly, within the next 12 hours, at <a href="{{ new_entry.get_absolute_url }}">visualization link</a>.</p> 
+        </section>
+    </article>
+{% endblock %}

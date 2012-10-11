@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{{ entry.name }} | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <article>
+        <section>
+            <p><img class="screenshot" src="{{ entry.screenshot.url }}"></p>
+            <!-- TODO: add rating, comments -->
+            <!-- Add social media -->
+        </section>
+    </article>
+    <aside class="rules">
+    	<!-- TODO: add next/previous link -->
+        <h3>By {{ entry.name }}</h3>
+        {% if entry.url %}<p>{{ entry.description }}</p>{% endif %}
+        {% if entry.description %}<p>{{ entry.description }}</p>{% endif %}
+    </aside>
+{% endblock %}

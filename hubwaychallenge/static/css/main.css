@@ -51,8 +51,13 @@ article, .main aside {
 	padding: 0 30px;
 }
 
-aside h3 {
+aside h3, aside h3 a {
 	color: #49aa43;
+}
+
+aside.rules p {
+	font-size: 0.8em;
+	line-height: 1.2em;
 }
 
 article header {
@@ -172,9 +177,65 @@ code {
 	font-size: 0.9em;
 }
 
+.submission label {
+	float: left;
+	width: 220px;
+	overflow: hidden;
+	clear: left;
+}
+
+.submission textarea, .submission input[type='text'] {
+	width: 320px;
+	padding: 0.4em;
+}
+
+.submission .field {
+	margin-bottom: 20px;
+}
+
+.submission .form-action, .submission .help-text {
+	padding-left: 220px;
+}
+
+.submission .help-text {
+	float: left;
+	margin-bottom: 20px;
+	line-height: 1.4em;
+}
+
+.submission input[type='checkbox'] {
+	margin-right: 0.4em;
+}
+
+button.submission {
+	display: block; 
+	border: none;
+	width: 200px; 
+	height: 48px; 
+	background: url(../img/btn_submit.png) no-repeat top left; 
+	line-height: 48px;
+	padding-left: 0px;
+	overflow: hidden;
+	color: white;
+	text-decoration: none;
+}
+
+.errorlist {
+	padding-left: 220px;
+	color: red;
+	list-style: none;
+	margin-bottom: 0px;
+}
+
+img.screenshot {
+	max-width: 580px;
+}
+
 /*** Media Queries ***/
 
 @media only screen and (min-width: 768px) {
+
+	/* TODO: adjust font-sizes */
 
 	.main aside {
         width: 24%;

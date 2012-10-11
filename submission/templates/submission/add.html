@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Submit new visualization | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <article>
+        <section>
+            <h2>Submit your visualization</h2>
+            <p>Please enter your name, email and upload your visualization image. If you have additional resources, like a link, other files or a short description, even better, add everything to your submission.</p>
+            <p>Deadline is October 31<sup>st</sup> 2012, 11:59pm.</p> 
+            <p><form action="" class="submission" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ entryform.non_field_errors }}
+                <div class="field">
+                    {{ entryform.name.errors }}
+                    <label class="highgreen" for="id_name">Name (required):</label>
+                    <input id="id_name" type="text" name="name" maxlength="100"{% if user.is_authenticated %}value="{{ user.get_full_name }}"{% endif %}>
+                </div>
+                <div class="field">
+                    {{ entryform.email.errors }}
+                    <label class="highgreen" for="id_email">Email (required):</label>
+                    <input id="id_email" type="text" name="email" maxlength="100"{% if user.is_authenticated %}value="{{ user.email }}"{% endif %}>
+                </div>
+                <div class="field">
+                    {{ entryform.screenshot.errors }}
+                    <label class="highgreen" for="id_screenshot">Visualization (required):</label>
+                    {{ entryform.screenshot }}
+                    <span class="help-text">A PNG, JPEG or GIF of your visualization, or a screenshot or photograph of it. It will be resized and shown later on this website at a max width of 580px.</span>
+                </div>
+                <div class="field">
+                    {{ entryform.description.errors }}
+                    <label for="id_description">Short description:</label>
+                    {{ entryform.description }}
+                    <span class="help-text">Tell us a little about what you did or what we are looking at.</span>
+                </div>
+                <div class="field">
+                    {{ entryform.file.errors }}
+                    <label for="id_file">File:</label>
+                    {{ entryform.file }}
+                    <span class="help-text">Something else than the image above, like a vector graphic, sound file, R script, etc., this is the place for it, max. 20MB.</span>
+                </div>
+                <div class="field">
+                    {{ entryform.url.errors }}
+                    <label for="id_url">Url:</label>
+                    {{ entryform.url }}
+                    <span class="help-text">If you have your visualization somewhere online, add here public URL to and we will link to it.</span>
+                </div>
+                <div class="field">
+                    {{ entryform.rules.errors }}
+                    <label for="id_rules" class="highgreen">Accept rules (required):</label>
+                    {{ entryform.rules }}
+                    I have read and agree to the <a class="highgreen" href="#rules">Rules</a>.
+                </div>
+                <div class="field">
+                    {{ entryform.captcha.errors }}
+                    <label for="id_captcha_0" class="highgreen">{{ entryform.captcha.label }}</label>
+                    {{ entryform.captcha }}
+                </div>
+                <div class="form-action">
+                    <button class="submission" type="submit">Submit</button>
+                </div>
+                <p><span class="help-text">If you're having problems using the form, please send an email with your submission to submit[at]hubwaydatachallenge.org before October 31<sup>st</sup> 2012, 11:59pm instead.</span></p>
+            </form></p>
+        </section>
+    </article>
+    <aside class="rules">
+        <h3><a id="rules">Rules</a></h3>
+        <p>Hubway Data Visualization Challenge (the “Challenge”) is open to any person who is at least eighteen (18) years of age at the time of entry. Employees of the Metropolitan Area Planning Council (“MAPC”) and any other agencies or companies that are associated with the creation, promotion, and execution of this Challenge, and their subsidiaries and affiliates as well as the immediate family members (spouse, parents, children and siblings) and household members of each such employee are not eligible to participate.<p>
+        <p>Submissions will open on Friday, October 12, 2012.  Entries should be received at the MAPC offices, located at 60 Temple Place, Boston, MA 02111 by 5:00 p.m, on Wednesday , October 31st  or submitted online at http://www.hubwaydatachallenge.org by 11:59 p.m. EST on Wednesday October 31, 2012. </p>
+        <p>While entrants may retain ownership of the contents of an entry, by participating in the Challenge, entrants agree to grant to the MAPC, Hubway, and its operator, Alta Bicycle Share, Inc. the royalty-free and non-exclusive right to use, distribute, reproduce, modify, adapt and publicly display such entry for any or all uses.</p>
+        <p>By participating in the Challenge, entrants agree to release and hold harmless the MAPC and all of its officers, agents and employees, and those of any other agencies or companies that are associated with the creation, promotion, and execution of this Challenge, against all suits, claims, demands and liabilities of every name and nature, both at law and in equity, based upon or arising out of participation in the Challenge or receipt of use of the prize.</p>
+    </aside>
+{% endblock %}

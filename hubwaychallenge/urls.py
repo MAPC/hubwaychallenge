@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.simple import direct_to_template, redirect_to
+from django.conf import settings
 
 # API
 from tastypie.api import Api
@@ -37,4 +38,14 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'hubwaychallenge.views.logout_view', name='logout'),
     (r'^login-error/$', direct_to_template, {'template': 'login-error.html'}),
     url(r'^data-api/$', 'hubwaychallenge.views.data_api', name='data-api'),
+
+    (r'^submission/', include('submission.urls')), 
+
+)
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$',
+         'django.views.static.serve',
+         {'document_root': settings.MEDIA_ROOT, 'show_indexes': True, }),
 )
