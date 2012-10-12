@@ -188,6 +188,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'social_auth.context_processors.social_auth_by_type_backends',
 )
+SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
+
 
 LOGIN_URL = '/register/'
 LOGIN_REDIRECT_URL = '/data-api/'
