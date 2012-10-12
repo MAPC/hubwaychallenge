@@ -30,5 +30,6 @@ def add(request):
 def detail(request, id):
     """ Render detail page for an entry """
     entry = get_object_or_404(Entry, pk=id)
+    user = request.user
     return render_to_response('submission/detail.html', locals(), context_instance=RequestContext(request))
 

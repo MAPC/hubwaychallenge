@@ -1,8 +1,10 @@
 {% extends "base.html" %}
+{% load admin_urls %}
 
 {% block title %}{{ entry.name }} | {{ block.super }}{% endblock %}
 
 {% block content %}
+    {% if entry.approved or user.is_staff %}
     <article>
         <section>
             <p><img class="screenshot" src="{{ entry.screenshot.url }}"></p>
@@ -10,10 +12,18 @@
             <!-- Add social media -->
         </section>
     </article>
-    <aside class="rules">
+    <aside>
+        {% if user.is_staff %}<a href="{% url admin:submission_entry_change entry.id %}">Edit</a>{% endif %}
     	<!-- TODO: add next/previous link -->
         <h3>By {{ entry.name }}</h3>
         {% if entry.url %}<p>{{ entry.description }}</p>{% endif %}
         {% if entry.description %}<p>{{ entry.description }}</p>{% endif %}
     </aside>
+    {% else %}
+    <article>
+        <section>
+            <p>The visualization will appear on this page shortly...</p>
+        </section>
+    </article>
+    {% endif %}
 {% endblock %}
