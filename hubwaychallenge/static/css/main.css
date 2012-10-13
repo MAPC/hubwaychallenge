@@ -231,6 +231,25 @@ img.screenshot {
 	max-width: 580px;
 }
 
+ul.navigation {
+	padding-left: 0px;
+}
+
+ul.navigation li {
+	display: inline;
+	list-style-type: none;
+	padding-right: 50%;
+	font-size: 0.8em;
+}
+
+ul.navigation li a {
+	text-decoration: none;
+}
+
+ul.navigation li:last-child {
+	padding-right: 0px;
+}
+
 /*** Media Queries ***/
 
 @media only screen and (min-width: 768px) {

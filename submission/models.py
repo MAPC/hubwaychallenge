@@ -20,10 +20,11 @@ class Entry(models.Model):
     approved = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
 
-    userrating = RatingField(range=5)
-    judgerating = RatingField(range=5)
+    userrating = RatingField(range=5, can_change_vote=True)
+    judgerating = RatingField(range=5, can_change_vote=True)
 
     class Meta:
+        ordering = ['id']
         verbose_name = _('Entry')
         verbose_name_plural = _('Entries')
 
@@ -33,3 +34,8 @@ class Entry(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('submission.views.detail', None, { 'id': self.id, })
+
+    @models.permalink
+    def get_approval_url(self):
+        return ('submission.views.approve', None, { 'id': self.id, })
+

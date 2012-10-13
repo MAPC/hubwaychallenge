@@ -14,18 +14,18 @@
                 <div class="field">
                     {{ entryform.name.errors }}
                     <label class="highgreen" for="id_name">Name (required):</label>
-                    <input id="id_name" type="text" name="name" maxlength="100"{% if user.is_authenticated %}value="{{ user.get_full_name }}"{% endif %}>
+                    <input id="id_name" type="text" name="name" maxlength="100" value="{% firstof entryform.name.value user.get_full_name %}">
                 </div>
                 <div class="field">
                     {{ entryform.email.errors }}
                     <label class="highgreen" for="id_email">Email (required):</label>
-                    <input id="id_email" type="text" name="email" maxlength="100"{% if user.is_authenticated %}value="{{ user.email }}"{% endif %}>
+                    <input id="id_email" type="text" name="email" maxlength="100" value="{% firstof entryform.email.value user.email %}">
                 </div>
                 <div class="field">
                     {{ entryform.screenshot.errors }}
                     <label class="highgreen" for="id_screenshot">Visualization (required):</label>
                     {{ entryform.screenshot }}
-                    <span class="help-text">A PNG, JPEG or GIF of your visualization, or a screenshot or photograph of it. It will be resized and shown later on this website at a max width of 580px.</span>
+                    <span class="help-text">A PNG, JPEG or GIF of your visualization, or a screenshot or photograph of it.</span>
                 </div>
                 <div class="field">
                     {{ entryform.description.errors }}

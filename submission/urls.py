@@ -6,4 +6,6 @@ from submission import views
 urlpatterns = patterns('submission.views',
     url('^(?P<id>\d+)/$', 'detail', name='entry-detail'),
     url('^add/', 'add', name='add-entry'),
+    url('^rate/(?P<id>\d+)$', 'rate', name='rate-entry'),
+    url('^approve/(?P<id>\d+)$', 'approve', name='approve-entry'),
 )

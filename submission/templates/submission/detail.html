@@ -3,21 +3,113 @@
 
 {% block title %}{{ entry.name }} | {{ block.super }}{% endblock %}
 
+{% block extra_head %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}lightbox/css/jquery.lightbox-0.5.css" media="screen" />
+{% endblock %}
+
+{% block fb_code %}
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '265086433612349', // App ID
+      channelUrl : '//www.hubwaydatachallenge.org/channel.html', // Channel File
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
+    FB.Event.subscribe('edge.create', function(targetUrl) {
+      _gaq.push(['_trackSocial', 'facebook', 'like', targetUrl]);
+    });
+    FB.Event.subscribe('edge.remove', function(targetUrl) {
+      _gaq.push(['_trackSocial', 'facebook', 'unlike', targetUrl]);
+    });
+    FB.Event.subscribe('message.send', function(targetUrl) {
+      _gaq.push(['_trackSocial', 'facebook', 'send', targetUrl]);
+    });
+  };
+
+  // Load the SDK Asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     ref.parentNode.insertBefore(js, ref);
+   }(document));
+</script>
+{% endblock %}
+
 {% block content %}
     {% if entry.approved or user.is_staff %}
     <article>
         <section>
-            <p><img class="screenshot" src="{{ entry.screenshot.url }}"></p>
-            <!-- TODO: add rating, comments -->
-            <!-- Add social media -->
+            
+            <p><a href="{{ entry.screenshot.url }}" class="lightbox" title="{{ entry.description }}"><img class="screenshot" src="{{ tnurl }}"></a></p>
+            <p>By <span class="highgreen">{{ entry.name }}</p>
+            {% if entry.description %}<p>{{ entry.description }}</p>{% endif %}
+            {% if entry.url %}<p><a href="{{ entry.url }}">{{ entry.url }}</a></p>{% endif %}
         </section>
     </article>
     <aside>
-        {% if user.is_staff %}<a href="{% url admin:submission_entry_change entry.id %}">Edit</a>{% endif %}
+        <p>{% if not entry.approved %}<a class="approval" href="javascript:void(0)">Approve</a>{% endif %}</p>
     	<!-- TODO: add next/previous link -->
-        <h3>By {{ entry.name }}</h3>
-        {% if entry.url %}<p>{{ entry.description }}</p>{% endif %}
-        {% if entry.description %}<p>{{ entry.description }}</p>{% endif %}
+        <ul class="navigation">
+            {% if previous %}<li><a href="{{ previous.get_absolute_url }}">&larr; previous</a></li>{% endif %}
+            {% if next %}<li><a href="{{ next.get_absolute_url }}">next &rarr;</a></li>{% endif %}
+        </ul>
+        <h3>Average user rating</h3>
+        <p><span id="userrating" class="rating"></span><br>
+        {% if user.is_authenticated %}<span class="help-text userrating-msg">Click stars to rate this visualization.</span>{% else %}<a href="/register/" class="help-text">Register to rate this visualization.</a>{% endif %}</p>
+        <h3>Share with your friends!</h3>
+        <ul class="socialmedia">
+            <li><a href="https://twitter.com/share" class="twitter-share-button" data-via="MAPCMetroBoston" data-hashtags="hubwayviz" data-text="Half a million Hubway bike trips visualized by {{ entry.name }}!">Tweet</a>
+            <script type="text/javascript" charset="utf-8">
+                window.twttr = (function (d,s,id) {
+                  var t, js, fjs = d.getElementsByTagName(s)[0];
+                  if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+                  js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+                  return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+                }(document, "script", "twitter-wjs"));
+                function extractParamFromUri(uri, paramName) {
+                  if (!uri) {
+                    return;
+                  }
+                  var regex = new RegExp('[\\?&#]' + paramName + '=([^&#]*)');
+                  var params = regex.exec(uri);
+                  if (params != null) {
+                    return unescape(params[1]);
+                  }
+                  return;
+                }
+                function trackTwitter(intent_event) {
+                    if (intent_event) {
+                      var opt_pagePath;
+                      if (intent_event.target && intent_event.target.nodeName == 'IFRAME') {
+                            opt_target = extractParamFromUri(intent_event.target.src, 'url');
+                      }
+                      _gaq.push(['_trackSocial', 'twitter', 'tweet', opt_pagePath]);
+                    }
+                }
+                //Wrap event bindings - Wait for async js to load
+                twttr.ready(function (twttr) {
+                    //event bindings
+                    twttr.events.bind('tweet', trackTwitter);
+                });
+                // Twitter API 'Tweet' button tracking
+            </script></li>
+            <li><div class="fb-like" data-href="http://hubwaydatachallenge.org{{ entry.get_absolute_url }}" data-send="false" data-layout="button_count" data-width="200" data-show-faces="false"></div></li>
+            <li><a href="http://pinterest.com/pin/create/button/?url=http://hubwaydatachallenge.org{{ entry.get_absolute_url }}&media=http://hubwaydatachallenge.org{{ tnurl }}&description=Hubway visualization by {{ entry.name }}" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a></li>
+            <li><div class="g-plusone" data-size="medium"></div>
+            <script type="text/javascript">
+              (function() {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+              })();
+            </script></li>
+        </ul>
     </aside>
     {% else %}
     <article>
@@ -26,4 +118,93 @@
         </section>
     </article>
     {% endif %}
+{% endblock %}
+
+{% block extra_script %}
+{{ block.super }}
+<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+<script src="{{ STATIC_URL }}raty/js/jquery.raty.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}lightbox/js/jquery.lightbox-0.5.pack.js"></script>
+<script>
+    $(function() {
+        // activate lightbox
+        $('a.lightbox').lightBox({
+            imageLoading: '{{ STATIC_URL }}lightbox/images/lightbox-ico-loading.gif',
+            imageBtnClose: '{{ STATIC_URL }}lightbox/images/lightbox-btn-close.gif',
+            imageBtnPrev: '{{ STATIC_URL }}lightbox/images/lightbox-btn-prev.gif',
+            imageBtnNext: '{{ STATIC_URL }}lightbox/images/lightbox-btn-next.gif',
+            imageBlank: '{{ STATIC_URL }}lightbox/images/lightbox-blank.gif'
+        });
+        $('a.approval').on('click', function() {
+            $.post('{{ entry.get_approval_url }}',
+                    {
+                        approved: 'True', 
+                    }
+                )
+                .success(
+                    function() {
+                        $('a.approval').parent().html('Approved!');
+                    }
+                )
+                .error(
+                    function() { 
+                        $('a.approval').text('Something went wrong...');
+                    }
+                );
+        });        
+        // Django CSRF AJAX helper (https://docs.djangoproject.com/en/dev/ref/contrib/csrf/#ajax)
+        $.ajaxSetup({ 
+             beforeSend: function(xhr, settings) {
+                 function getCookie(name) {
+                     var cookieValue = null;
+                     if (document.cookie && document.cookie != '') {
+                         var cookies = document.cookie.split(';');
+                         for (var i = 0; i < cookies.length; i++) {
+                             var cookie = jQuery.trim(cookies[i]);
+                             // Does this cookie string begin with the name we want?
+                         if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                             cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                             break;
+                         }
+                     }
+                 }
+                 return cookieValue;
+                 }
+                 if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                     // Only send the token to relative URLs i.e. locally.
+                     xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                 }
+             } 
+        });
+        // Add userrating
+        $('#userrating').raty({
+            readOnly: {% if user.is_authenticated %}false{% else %}true{% endif %},
+            score: {{ userrating }},
+            path: '{{ STATIC_URL }}raty/img',
+            starOff: 'star-off-big.png',
+            starOn: 'star-on-big.png',
+            starHalf: 'star-half-big.png',
+            size: 24,
+            hints: ['fair', 'good', 'very nice', 'beautiful', 'gorgeous'],
+            click: function(score, evt) {
+                $.post('/submission/rate/' + {{ entry.id }},
+                    {
+                        score: score, 
+                    }
+                )
+                .success(
+                    function() {
+                        $(".userrating-msg").text("Thank You! - Click again to change.");
+                    }
+                )
+                .error(
+                    function() { 
+                        $.fn.raty.cancel('#userrating');
+                        $(".userrating-msg").text("Something went wrong...");
+                    }
+                );
+              }
+        });
+    });
+</script>
 {% endblock %}
