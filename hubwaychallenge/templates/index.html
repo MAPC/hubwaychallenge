@@ -50,7 +50,8 @@
     </header>
     <section>
         <h2>How to Submit</h2>
-        <p>Submission will open here on Friday, October 12, 2012.</p>
+        <p><a class="submission home" href="{% url add-entry %}">Submit your Data Viz!</a></p>
+        {% if lastentry %}<p>Latest visualization submitted by: <a class="highgreen" href="{{ lastentry.get_absolute_url }}">{{ lastentry.name }}</a></p>{% endif %}
     </section>
     <section>
         <h2>Deadline</h2>

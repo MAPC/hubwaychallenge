@@ -220,6 +220,22 @@ button.submission {
 	text-decoration: none;
 }
 
+a.submission.home {
+	display: block; 
+	border: none;
+	width: 288px; 
+	height: 48px; 
+	background: url(../img/btn_submit_lg.png) no-repeat top left; 
+	line-height: 48px;
+	padding-left: 20px;
+	overflow: hidden;
+	color: white;
+	text-decoration: none;
+	font-weight: 300;
+	font-size: 1.4em;
+}
+
+
 .errorlist {
 	padding-left: 220px;
 	color: red;

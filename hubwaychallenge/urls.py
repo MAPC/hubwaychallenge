@@ -16,8 +16,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'hubwaychallenge.views.home', name='home'),
-    (r'^$', direct_to_template, {'template': 'index.html'}),
+    url(r'^$', 'hubwaychallenge.views.home', name='home'),
     (r'^register/$', direct_to_template, {'template': 'register.html'}),
     # url(r'^hubwaychallenge/', include('hubwaychallenge.foo.urls')),
 
