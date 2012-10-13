@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.decorators.cache import never_cache
 
 from PIL import Image
 
@@ -20,6 +21,7 @@ def vis_thumbnail(visimage):
     tnpath = '%s_tn%s' % (visimage.path[:-4], visimage.path[-4:])
     tn.save(tnpath, 'PNG', optimize=True)
 
+@never_cache
 def add(request):
     """ Add new entry """
 
