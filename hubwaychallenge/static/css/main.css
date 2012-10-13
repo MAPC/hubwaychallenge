@@ -207,32 +207,28 @@ code {
 	margin-right: 0.4em;
 }
 
-button.submission {
+button.submission, a.submission.home {
 	display: block; 
 	border: none;
-	width: 200px; 
-	height: 48px; 
-	background: url(../img/btn_submit.png) no-repeat top left; 
+	height: 48px;
 	line-height: 48px;
-	padding-left: 0px;
-	overflow: hidden;
-	color: white;
-	text-decoration: none;
-}
-
-a.submission.home {
-	display: block; 
-	border: none;
-	width: 288px; 
-	height: 48px; 
-	background: url(../img/btn_submit_lg.png) no-repeat top left; 
-	line-height: 48px;
-	padding-left: 20px;
 	overflow: hidden;
 	color: white;
 	text-decoration: none;
 	font-weight: 300;
 	font-size: 1.4em;
+}
+
+button.submission {
+	width: 200px; 
+	background: url(../img/btn_submit.png) no-repeat top left; 
+	padding-left: 0px;
+}
+
+a.submission.home {
+	width: 288px; 
+	background: url(../img/btn_submit_lg.png) no-repeat top left; 
+	padding-left: 20px;
 }
 
 
