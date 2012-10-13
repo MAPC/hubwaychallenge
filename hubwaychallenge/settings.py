@@ -192,7 +192,7 @@ SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
 
 
 LOGIN_URL = '/register/'
-LOGIN_REDIRECT_URL = '/data-api/'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_ERROR_URL = '/login-error/'
 
 XS_SHARING_ALLOWED_ORIGINS = '*'
