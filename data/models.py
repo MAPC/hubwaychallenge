@@ -49,3 +49,19 @@ class Trip(models.Model):
 
     def __unicode__(self):
         return '%s' % (self.id)
+
+
+class StationCapacity(models.Model):
+    """ Aggregated from http://thehubway.com/data/stations/bikeStations.xml """
+    
+    id = models.IntegerField(primary_key=True)
+    station = models.ForeignKey(Station)
+    day = models.DateField()
+    capacity = models.IntegerField()
+
+    class Meta:
+        verbose_name = _('Station capacity')
+        verbose_name_plural = _('Station Capacities')
+
+    def __unicode__(self):
+        return '%s' % (self.id)

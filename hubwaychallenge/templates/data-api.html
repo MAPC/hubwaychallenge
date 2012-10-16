@@ -31,6 +31,10 @@
         "list_endpoint": "/api/v1/station/",
         "schema": "/api/v1/station/schema/"
     },
+    "stationcapacity": {
+        "list_endpoint": "/api/v1/stationcapacity/",
+        "schema": "/api/v1/stationcapacity/schema/"
+    },
     "trip": {
         "list_endpoint": "/api/v1/trip/",
         "schema": "/api/v1/trip/schema/"
@@ -108,6 +112,9 @@
 
         <p>All trips longer than an hour departing from Station Nr 33 in August 2011:</p>
 <pre><code>http://hubwaydatachallenge.org/api/v1/trip/?format=json{{ auth_string }}&duration__gt=3600&start_station=33&start_date__gte=2011-08-01&end_date__lte=2011-08-31</code></pre>
+
+        <p>Capacity (number of docks) for Station Nr 33 on August 27th 2011:</p>
+<pre><code>http://hubwaydatachallenge.org/api/v1/stationcapacity/?format=json{{ auth_string }}&day=2011-08-27&station=33</code></pre>
 
         <h3>Data schemas</h3>
 
