@@ -20,6 +20,7 @@ class StationResource(ModelResource):
     class Meta:
         queryset = Station.objects.all()
         resource_name = 'station'
+        ordering = ['id', 'terminalname', 'name',]
         allowed_methods = ['get']
         cache = SimpleCache()
         limit = 100
@@ -50,6 +51,7 @@ class TripResource(ModelResource):
         queryset = Trip.objects.filter(start_date__isnull=False, end_date__isnull=False)
         resource_name = 'trip'
         allowed_methods = ['get']
+        ordering = ['id', 'station', 'start_date', 'start_station', 'end_date', 'end_station', 'bike_nr', 'zip_code', 'birth_date', 'gender',]
         cache = SimpleCache()
         limit = 100
         # throttle = BaseThrottle(throttle_at=3600)
@@ -80,6 +82,7 @@ class StationCapacityResource(ModelResource):
         queryset = StationCapacity.objects.all()
         resource_name = 'stationcapacity'
         allowed_methods = ['get']
+        ordering = ['id', 'station', 'day', 'capacity',]
         cache = SimpleCache()
         limit = 100
         # throttle = BaseThrottle(throttle_at=3600)
