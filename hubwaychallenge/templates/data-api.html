@@ -119,6 +119,9 @@
         <p>Last day of recorded capacity for Station Nr 33, before or on August 27th 2011 (because we order the query descending by 'day', it will be the first object in our results):</p>
 <pre><code>http://hubwaydatachallenge.org/api/v1/stationcapacity/?format=json{{ auth_string }}&day__lte=2011-08-27&station=33&order_by=-day</code></pre>
 
+        <p>Last recorded status for Station Nr 33, before or on August 27th 2011 1:10am (because we order the query descending by 'update', it will be the first object in our results):</p>
+<pre><code>http://hubwaydatachallenge.org/api/v1/stationstatus/?format=json{{ auth_string }}&station=33&update__lte=2011-08-27T1:10&order_by=-update</code></pre>
+
         <h3>Data schemas</h3>
 
         <p>You can explore data schemas by interacting with the API and following the resource schema endpoints.</p>
@@ -469,6 +472,101 @@
         "id",
         "station",
         "day",
+        "capacity"
+    ]
+}</code></pre>
+
+
+<p><a href="http://hubwaydatachallenge.org/api/v1/stationstatus/schema/?format=json{{ auth_string }}" class="highgreen">Stationstatus schema:</a></p>
+<pre><code class="json">{
+    "allowed_detail_http_methods": [
+        "get"
+    ],
+    "allowed_list_http_methods": [
+        "get"
+    ],
+    "default_format": "application/json",
+    "default_limit": 100,
+    "fields": {
+        "capacity": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Integer data. Ex: 2673",
+            "nullable": false,
+            "readonly": false,
+            "type": "integer",
+            "unique": false
+        },
+        "id": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Integer data. Ex: 2673",
+            "nullable": false,
+            "readonly": false,
+            "type": "integer",
+            "unique": true
+        },
+        "nbBikes": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Integer data. Ex: 2673",
+            "nullable": false,
+            "readonly": false,
+            "type": "integer",
+            "unique": false
+        },
+        "nbEmptyDocks": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Integer data. Ex: 2673",
+            "nullable": false,
+            "readonly": false,
+            "type": "integer",
+            "unique": false
+        },
+        "resource_uri": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "Unicode string data. Ex: \"Hello World\"",
+            "nullable": false,
+            "readonly": true,
+            "type": "string",
+            "unique": false
+        },
+        "station": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "A single related resource. Can be either a URI or set of nested resource data.",
+            "nullable": false,
+            "readonly": false,
+            "related_type": "to_one",
+            "type": "related",
+            "unique": false
+        },
+        "update": {
+            "blank": false,
+            "default": "No default provided.",
+            "help_text": "A date & time as a string. Ex: \"2010-11-10T03:07:43\"",
+            "nullable": false,
+            "readonly": false,
+            "type": "datetime",
+            "unique": false
+        }
+    },
+    "filtering": {
+        "capacity": 1,
+        "id": 1,
+        "nbBikes": 1,
+        "nbEmptyDocks": 1,
+        "station": 1,
+        "update": 1
+    },
+    "ordering": [
+        "id",
+        "station",
+        "update",
+        "nbBikes",
+        "nbEmptyDocks",
         "capacity"
     ]
 }</code></pre>

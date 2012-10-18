@@ -4,12 +4,13 @@ from django.conf import settings
 
 # API
 from tastypie.api import Api
-from hubwaychallenge.api import StationResource, TripResource, StationCapacityResource
+from hubwaychallenge.api import StationResource, TripResource, StationCapacityResource, StationStatusResource
 
 v1_api = Api(api_name='v1')
 v1_api.register(StationResource())
 v1_api.register(TripResource())
 v1_api.register(StationCapacityResource())
+v1_api.register(StationStatusResource())
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin

@@ -7,7 +7,7 @@ from tastypie.authentication import ApiKeyAuthentication
 from tastypie.authorization import DjangoAuthorization
 from tastypie.models import create_api_key
 
-from data.models import Station, Trip, StationCapacity
+from data.models import Station, Trip, StationCapacity, StationStatus
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -94,3 +94,28 @@ class StationCapacityResource(ModelResource):
             'day': ALL,
             'capacity': ALL,
         }
+
+
+class StationStatusResource(ModelResource):
+
+    station = fields.ToOneField('hubwaychallenge.api.StationResource', 'station')
+
+    class Meta:
+        queryset = StationStatus.objects.all()
+        resource_name = 'stationstatus'
+        allowed_methods = ['get']
+        ordering = ['id', 'station', 'update', 'nbBikes', 'nbEmptyDocks', 'capacity',]
+        cache = SimpleCache()
+        limit = 100
+        # throttle = BaseThrottle(throttle_at=3600)
+        authentication = ApiKeyAuthentication()
+        authorization = DjangoAuthorization()
+        filtering = {
+            'id': ALL,
+            'station': ALL,
+            'update': ALL,
+            'nbBikes': ALL,
+            'nbEmptyDocks': ALL,
+            'capacity': ALL,
+        }
+

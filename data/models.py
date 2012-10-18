@@ -65,3 +65,38 @@ class StationCapacity(models.Model):
 
     def __unicode__(self):
         return '%s' % (self.id)
+
+
+class StationStatus(models.Model):
+    """
+    A subset of Hubway's public data schema:
+    
+    <stations lastUpdate="1312912074530" version="2.0">
+        <station>
+            <id>3</id>
+            <name>Colleges of the Fenway</name>
+            <terminalName>B32006</terminalName>
+            <lat>42.339503</lat>
+            <long>-71.101845</long>
+            <installed>true</installed>
+            <locked>false</locked>
+            <installDate/>
+            <removalDate/>
+            <temporary>false</temporary>
+            <nbBikes>6</nbBikes>
+            <nbEmptyDocks>11</nbEmptyDocks>
+        </station>
+    </stations>
+    """
+    id = models.IntegerField(primary_key=True)
+    station = models.ForeignKey(Station)
+    update = models.DateTimeField()
+    nbBikes = models.IntegerField()
+    nbEmptyDocks = models.IntegerField()
+    capacity = models.IntegerField()
+    
+    class Meta:
+        verbose_name_plural = 'Stationstatuses'
+
+    def __unicode__(self):
+        return '%s' % (self.id)
