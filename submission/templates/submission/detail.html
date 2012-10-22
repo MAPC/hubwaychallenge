@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load admin_urls %}
+{% load ratings %}
 
 {% block title %}{{ entry.name }} | {{ block.super }}{% endblock %}
 
@@ -62,6 +63,13 @@
         <h3>Average user rating</h3>
         <p><span id="userrating" class="rating"></span><br>
         {% if user.is_authenticated %}<span class="help-text userrating-msg">Click stars to rate this visualization.</span>{% else %}<a href="/register/" class="help-text">Register to rate this visualization.</a>{% endif %}</p>
+        {% if judge %}
+        <h3>Your private judge rating</h3>
+        <p><span id="judgerating" class="rating"></span><br>
+          <span class="help-text judgerating-msg">Click stars to rate this visualization.</span></p>
+          <textarea class="judgenote" placeholder="Add a personal note (optional)..." rows="5">{{ judgenote.note }}</textarea>
+          <button class="judgenote">Save Note</button><span class="help-text judgenoterating-msg"></span>
+        {% endif %}
         <h3>Share with your friends!</h3>
         <ul class="socialmedia">
             <li><a href="https://twitter.com/share" class="twitter-share-button" data-via="MAPCMetroBoston" data-hashtags="hubwayviz" data-text="Half a million Hubway bike trips visualized by {{ entry.name }}!">Tweet</a>
@@ -135,23 +143,6 @@
             imageBtnNext: '{{ STATIC_URL }}lightbox/images/lightbox-btn-next.gif',
             imageBlank: '{{ STATIC_URL }}lightbox/images/lightbox-blank.gif'
         });
-        $('a.approval').on('click', function() {
-            $.post('{{ entry.get_approval_url }}',
-                    {
-                        approved: 'True', 
-                    }
-                )
-                .success(
-                    function() {
-                        $('a.approval').parent().html('Approved!');
-                    }
-                )
-                .error(
-                    function() { 
-                        $('a.approval').text('Something went wrong...');
-                    }
-                );
-        });        
         // Django CSRF AJAX helper (https://docs.djangoproject.com/en/dev/ref/contrib/csrf/#ajax)
         $.ajaxSetup({ 
              beforeSend: function(xhr, settings) {
@@ -176,18 +167,35 @@
                  }
              } 
         });
+        $('a.approval').on('click', function() {
+            $.post('{{ entry.get_approval_url }}',
+                    {
+                        approved: 'True', 
+                    }
+                )
+                .success(
+                    function() {
+                        $('a.approval').parent().html('Approved!');
+                    }
+                )
+                .error(
+                    function() { 
+                        $('a.approval').text('Something went wrong...');
+                    }
+                );
+        });        
         // Add userrating
         $('#userrating').raty({
             readOnly: {% if user.is_authenticated %}false{% else %}true{% endif %},
             score: {{ userrating }},
-            path: '{{ STATIC_URL }}raty/img',
-            starOff: 'star-off-big.png',
-            starOn: 'star-on-big.png',
-            starHalf: 'star-half-big.png',
+            path: "{{ STATIC_URL }}raty/img",
+            starOff: "star-off-big.png",
+            starOn: "star-on-big.png",
+            starHalf: "star-half-big.png",
             size: 24,
-            hints: ['fair', 'good', 'very nice', 'beautiful', 'gorgeous'],
+            hints: ["fair", "good", "very nice", "beautiful", "gorgeous"],
             click: function(score, evt) {
-                $.post('/submission/rate/' + {{ entry.id }},
+                $.post("/submission/rate/" + {{ entry.id }},
                     {
                         score: score, 
                     }
@@ -205,6 +213,59 @@
                 );
               }
         });
+        {% if judge %}
+        {% rating_by_user user on entry.judgerating as vote %}
+        // Add userrating
+        $('#judgerating').raty({
+            readOnly: false,
+            score: {{ vote|default_if_none:0 }},
+            path: "{{ STATIC_URL }}raty/img",
+            starOff: "star-off-big.png",
+            starOn: "star-on-big.png",
+            starHalf: "star-half-big.png",
+            size: 24,
+            hints: ["fair", "good", "very nice", "beautiful", "gorgeous"],
+            click: function(score, evt) {
+                $.post('/submission/judgerate/' + {{ entry.id }},
+                    {
+                        score: score, 
+                    }
+                )
+                .success(
+                    function() {
+                        $(".judgerating-msg").text("Thank You! (Click again to change)");
+                    }
+                )
+                .error(
+                    function() { 
+                        $.fn.raty.cancel('#userrating');
+                        $(".judgerating-msg").text("Something went wrong...");
+                    }
+                );
+              }
+        });
+        $("button.judgenote").on('click', function() {
+            $.post("{% url judgenote %}",
+                    {
+                        {% if judgenote %}id: {{ judgenote.id }},{% endif %}
+                        note: $("textarea.judgenote").val(), 
+                        entry: {{ entry.id }}
+                    }
+                )
+                .success(
+                    function() {
+                         $(".judgenoterating-msg").text("Note Saved");
+                    }
+                )
+                .error(
+                    function() { 
+                        $(".judgenoterating-msg").text("Something went wrong...");
+                    }
+                );
+  
+        });  
+
+        {% endif %}
     });
 </script>
 {% endblock %}

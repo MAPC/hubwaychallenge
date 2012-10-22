@@ -4,10 +4,11 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.cache import never_cache
+from django.core.exceptions import ObjectDoesNotExist
 
 from PIL import Image
 
-from submission.models import Entry
+from submission.models import Entry, JudgeNote
 from submission.forms import EntryForm
 
 
@@ -53,7 +54,14 @@ def detail(request, id):
     """ Render detail page for an entry """
     entry = get_object_or_404(Entry, pk=id)
     user = request.user
-    
+    judge = user.groups.filter(name='judges').exists()
+
+    if judge:
+        try:
+            judgenote = JudgeNote.objects.get(user=user, entry=entry)
+        except ObjectDoesNotExist:
+            judgenote = None;
+        
     tnurl = '%s_tn%s' % (entry.screenshot.url[:-4], entry.screenshot.url[-4:])
 
     if user.is_staff:
@@ -80,6 +88,44 @@ def rate(request, id):
             return HttpResponse(status=200)
         except:
             return HttpResponse(status=500)
+
+@login_required
+def judgerate(request, id):
+    """ Handler for an AJAX POST from a detail page for a rating score. """
+    judge = request.user.groups.filter(name='judges').exists()
+    if request.method == "POST" and judge:
+        entry = get_object_or_404(Entry.objects, pk=id)
+        try:
+            # add rating
+            entry.judgerating.add(score=request.POST['score'], user=request.user, ip_address=request.META['REMOTE_ADDR'])
+            return HttpResponse(status=200)
+        except:
+            return HttpResponse(status=500)
+    else:
+        return HttpResponse(status=500)
+
+@login_required
+def judgenote(request):
+    """ Handler for an AJAX POST from a detail page for a rating score. """
+    user = request.user
+    judge = user.groups.filter(name='judges').exists()
+    entry = Entry.objects.get(pk=request.POST['entry']) 
+    if request.method == "POST" and judge:
+        try:
+            if 'id' in request.POST:
+                judgenote = JudgeNote.objects.get(pk=request.POST['id'])
+            else:
+                judgenote = JudgeNote()
+
+            judgenote.note = request.POST['note']
+            judgenote.entry = entry
+            judgenote.user = user
+            judgenote.save()
+            return HttpResponse(status=200)
+        except:
+            return HttpResponse(status=500)
+    else:
+        return HttpResponse(status=500)
 
 @staff_member_required
 def approve(request, id):

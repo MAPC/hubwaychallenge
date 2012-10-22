@@ -29,7 +29,7 @@ class Entry(models.Model):
         verbose_name_plural = _('Entries')
 
     def __unicode__(self):
-        return '%s (%s)' % (self.name, self.email)
+        return '%s from %s' % (self.id, self.name)
 
     @models.permalink
     def get_absolute_url(self):
@@ -38,4 +38,19 @@ class Entry(models.Model):
     @models.permalink
     def get_approval_url(self):
         return ('submission.views.approve', None, { 'id': self.id, })
+
+
+class JudgeNote(models.Model):
+
+    user = models.ForeignKey(User)
+    entry = models.ForeignKey(Entry)
+    note = models.TextField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = _('JudgeNote')
+        verbose_name_plural = _('JudgeNotes')
+
+    def __unicode__(self):
+        return '%s for %s' % (self.user, self.entry)
+    
 

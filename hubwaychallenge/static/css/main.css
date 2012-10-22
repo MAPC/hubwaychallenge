@@ -60,6 +60,11 @@ aside.rules p {
 	line-height: 1.2em;
 }
 
+aside textarea {
+	font-size: 0.8em;
+	width: 80%;
+}
+
 article header {
 	font-size: 1.4em;
 	line-height: 1.4em;
@@ -260,6 +265,10 @@ ul.navigation li a {
 
 ul.navigation li:last-child {
 	padding-right: 0px;
+}
+
+button.judgenote {
+	margin-right: 8px;
 }
 
 /*** Media Queries ***/
