@@ -1,3 +1,5 @@
+import os.path
+
 from django.db import models
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
@@ -38,6 +40,9 @@ class Entry(models.Model):
     @models.permalink
     def get_approval_url(self):
         return ('submission.views.approve', None, { 'id': self.id, })
+
+    def filename(self):
+        return os.path.basename(self.file.name)
 
 
 class JudgeNote(models.Model):
