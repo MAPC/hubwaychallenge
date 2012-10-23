@@ -56,8 +56,8 @@
     <aside>
         <p>{% if not entry.approved %}<a class="approval" href="javascript:void(0)">Approve</a>{% endif %}</p>
         <ul class="navigation">
-            {% if previous %}<li><a href="{{ previous.get_absolute_url }}">&larr; previous</a></li>{% endif %}
-            {% if next %}<li><a href="{{ next.get_absolute_url }}">next &rarr;</a></li>{% endif %}
+            {% if previous %}<li><a class="highgreen" href="{{ previous.get_absolute_url }}"><div class="previous" style="background-image:url('{{ previous.thumbnail_url }}')"><span>&larr; previous</span></div></a></li>{% endif %}
+            {% if next %}<li><a class="highgreen" href="{{ next.get_absolute_url }}"><div class="next" style="background-image:url('{{ next.thumbnail_url }}')"><span>next &rarr;</span></div></a></li>{% endif %}
         </ul>
         <h3>Average user rating</h3>
         <p><span id="userrating" class="rating"></span><br>

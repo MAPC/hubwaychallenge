@@ -57,6 +57,7 @@ article, .main aside {
 
 aside h3, aside h3 a {
 	color: #49aa43;
+	clear: both;
 }
 
 aside.rules p {
@@ -260,21 +261,38 @@ img.screenshot.tn {
 
 ul.navigation {
 	padding-left: 0px;
+	margin-top: 0px;
+	margin-bottom: 100px;
 }
 
 ul.navigation li {
 	display: inline;
 	list-style-type: none;
-	padding-right: 50%;
-	font-size: 0.8em;
+	
 }
 
-ul.navigation li a {
+ul.navigation li a div {
 	text-decoration: none;
+	font-weight: 700;
+	font-size: 0.8em;
+	background-repeat: no-repeat;
+	padding: 20px 0px;
+	background-position: center;
+	width: 50%;
+	float: left;
+}
+
+ul.navigation li a div span {
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 6px;
 }
 
 ul.navigation li:last-child {
 	padding-right: 0px;
+}
+
+ul.navigation li a div.next {
+	text-align: right;
 }
 
 div.judgerating {
