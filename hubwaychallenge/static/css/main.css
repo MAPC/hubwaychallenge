@@ -13,6 +13,10 @@ h1 {
 	font-size: 3em;
 }
 
+h2 {
+	clear: both;
+}
+
 h2, h3 {
 	font-weight: 400;
 	text-shadow: 0px 1px 1px rgba(77, 77, 77, 0.4);
@@ -246,6 +250,12 @@ a.submission.home {
 
 img.screenshot {
 	max-width: 580px;
+}
+
+img.screenshot.tn {
+	max-width: 300px;
+	float: left;
+	margin-bottom: 20px;
 }
 
 ul.navigation {
