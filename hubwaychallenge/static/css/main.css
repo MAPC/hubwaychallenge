@@ -267,8 +267,22 @@ ul.navigation li:last-child {
 	padding-right: 0px;
 }
 
+div.judgerating {
+	border: 4px solid #268C26;
+	padding: 0px 1em;
+}
+
+.judgerating h3 {
+	margin-bottom: 0px
+}
+
+.judgerating p {
+	margin-top: 0px;
+}
+
 button.judgenote {
 	margin-right: 8px;
+	font-size: 0.8em;
 }
 
 /*** Media Queries ***/

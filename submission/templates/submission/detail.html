@@ -55,7 +55,6 @@
     </article>
     <aside>
         <p>{% if not entry.approved %}<a class="approval" href="javascript:void(0)">Approve</a>{% endif %}</p>
-    	<!-- TODO: add next/previous link -->
         <ul class="navigation">
             {% if previous %}<li><a href="{{ previous.get_absolute_url }}">&larr; previous</a></li>{% endif %}
             {% if next %}<li><a href="{{ next.get_absolute_url }}">next &rarr;</a></li>{% endif %}
@@ -64,11 +63,15 @@
         <p><span id="userrating" class="rating"></span><br>
         {% if user.is_authenticated %}<span class="help-text userrating-msg">Click stars to rate this visualization.</span>{% else %}<a href="/register/" class="help-text">Register to rate this visualization.</a>{% endif %}</p>
         {% if judge %}
-        <h3>Your private judge rating</h3>
+        <div class="judgerating">
+        <h3>Your judge rating</h3>
+        <span class="help-text"><em>Only visible to you.</em></span>
         <p><span id="judgerating" class="rating"></span><br>
-          <span class="help-text judgerating-msg">Click stars to rate this visualization.</span></p>
-          <textarea class="judgenote" placeholder="Add a personal note (optional)..." rows="5">{{ judgenote.note }}</textarea>
+          <span class="help-text judgerating-msg">Click stars to rate this visualization.</span>
+          <textarea class="judgenote" placeholder="Add a note (optional)..." rows="5">{{ judgenote.note }}</textarea>
           <button class="judgenote">Save Note</button><span class="help-text judgenoterating-msg"></span>
+        </p>
+        </div>
         {% endif %}
         <h3>Share with your friends!</h3>
         <ul class="socialmedia">
@@ -254,7 +257,7 @@
                 )
                 .success(
                     function() {
-                         $(".judgenoterating-msg").text("Note Saved");
+                         $(".judgenoterating-msg").text("Saved!").show().fadeOut(1500);
                     }
                 )
                 .error(
