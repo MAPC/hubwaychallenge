@@ -44,6 +44,9 @@ class Entry(models.Model):
     def filename(self):
         return os.path.basename(self.file.name)
 
+    def thumbnail_url(self):
+        return '%s_tn%s' % (self.screenshot.url[:-4], self.screenshot.url[-4:])
+
 
 class JudgeNote(models.Model):
 

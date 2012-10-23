@@ -61,8 +61,6 @@ def detail(request, id):
             judgenote = JudgeNote.objects.get(user=user, entry=entry)
         except ObjectDoesNotExist:
             judgenote = None;
-        
-    tnurl = '%s_tn%s' % (entry.screenshot.url[:-4], entry.screenshot.url[-4:])
 
     if user.is_staff:
         previous = get_first_obj(Entry.objects.filter(id__lt=id).reverse())
