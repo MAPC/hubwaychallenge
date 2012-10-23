@@ -49,7 +49,7 @@
     <section>
         <h2>How to Submit</h2>
         <p><a class="submission home" href="{% url add-entry %}">Submit your Data Viz!</a></p>
-        <p>It is possible to submit more that one visualization per person or team.</p>
+        <p>It is possible to submit more than one visualization per person or team.</p>
     {% if lastentry %}</section>
         <h2>Latest submitted visualization</h2>
         <p><a href="{{ lastentry.get_absolute_url }}" title="Hubway Data Visualization by {{ lastentry.name }}"><img class="screenshot tn" src="{{ lastentry.thumbnail_url }}" alt="Hubway Data Visualization by {{ lastentry.name }}"></a></p>
