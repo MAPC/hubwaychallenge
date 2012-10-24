@@ -74,9 +74,6 @@ def detail(request, id):
         previous = get_first_obj(Entry.objects.filter(id__lt=id, approved=True).reverse())
         next = get_first_obj(Entry.objects.filter(id__gt=id, approved=True))
     
-    userrating = entry.userrating.get_rating()
-    judgerating = entry.judgerating.get_rating()
-
     return render_to_response('submission/detail.html', locals(), context_instance=RequestContext(request))
 
 @login_required

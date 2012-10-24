@@ -168,7 +168,7 @@
         // Add userrating
         $('#userrating').raty({
             readOnly: {% if user.is_authenticated %}false{% else %}true{% endif %},
-            score: {{ userrating }},
+            score: {{ entry.userrating.get_rating }},
             path: "{{ STATIC_URL }}raty/img",
             starOff: "star-off-big.png",
             starOn: "star-on-big.png",
