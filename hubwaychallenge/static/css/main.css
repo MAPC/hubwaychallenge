@@ -187,6 +187,23 @@ code {
 	font-size: 0.9em;
 }
 
+.dia-de-los-muertos {
+	background: url(../img/dia-de-los-muertos.jpg);
+}
+
+.dia-de-los-muertos p, .dia-de-los-muertos h2, .dia-de-los-muertos form {
+	color: red;
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+.dia-de-los-muertos label, .dia-de-los-muertos input, .dia-de-los-muertos .help-text, .dia-de-los-muertos textarea {
+	color: red;
+}
+
+span.dia-de-los-muertos {
+	font-weight: 700;
+}
+
 .submission label {
 	float: left;
 	width: 220px;

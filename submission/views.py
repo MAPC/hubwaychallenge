@@ -7,6 +7,7 @@ from django.views.decorators.cache import never_cache
 from django.core.exceptions import ObjectDoesNotExist
 
 from PIL import Image
+from datetime import datetime
 
 from submission.models import Entry, JudgeNote
 from submission.forms import EntryForm
@@ -38,6 +39,10 @@ def add(request):
             return render_to_response('submission/thankyou.html', locals(), context_instance=RequestContext(request))
     # show empty form
     else:
+        if datetime.today().date() == datetime.strptime('2012-11-01', '%Y-%m-%d').date():
+            diadelosmuertos = True
+        else:
+            diadelosmuertos = False
         user = request.user
         entryform = EntryForm()
 
