@@ -51,10 +51,11 @@
         <p><a class="submission home" href="{% url add-entry %}">Submit your Data Viz!</a></p>
         <p>It is possible to submit more than one visualization per person or team.</p>
     {% if lastentry %}</section>
-        <h2>Latest submitted visualization</h2>
+        <h2>Last Submitted Visualization</h2>
         <p><a href="{{ lastentry.get_absolute_url }}" title="Hubway Data Visualization by {{ lastentry.name }}"><img class="screenshot tn" src="{{ lastentry.thumbnail_url }}" alt="Hubway Data Visualization by {{ lastentry.name }}"></a></p>
         <p>By <a class="highgreen" href="{{ lastentry.get_absolute_url }}">{{ lastentry.name }}</a></p>
-        {% if lastentry.description %}<p>{{ lastentry.description|truncatewords_html:40 }}</p>{% endif %}
+        <p><span id="userrating" class="rating"></span><br>{% if user.is_authenticated %}<span class="help-text userrating-msg">Click stars to rate this visualization.</span>{% else %}<a href="/register/" class="help-text">Register to rate!</a>{% endif %}</p></p>
+        {% if lastentry.description %}<p>{{ lastentry.description|truncatewords_html:20 }}</p>{% endif %}
     <section>{% endif %}
     </section>
     <section>
@@ -154,4 +155,42 @@
         </script></li>
     </ul>
 </aside>
+{% endblock %}
+
+{% block extra_script %}
+{{ block.super }}
+<script src="{{ STATIC_URL }}js/csrf.js"></script>
+<script src="{{ STATIC_URL }}raty/js/jquery.raty.min.js"></script>
+<script>
+    $(function() {
+        $('#userrating').raty({
+            readOnly: {% if user.is_authenticated %}false{% else %}true{% endif %},
+            score: {{ lastentry.userrating.get_rating }},
+            path: "{{ STATIC_URL }}raty/img",
+            starOff: "star-off-big.png",
+            starOn: "star-on-big.png",
+            starHalf: "star-half-big.png",
+            size: 24,
+            hints: ["fair", "good", "very nice", "beautiful", "gorgeous"],
+            click: function(score, evt) {
+                $.post("/submission/rate/" + {{ lastentry.id }},
+                    {
+                        score: score, 
+                    }
+                )
+                .success(
+                    function() {
+                        $(".userrating-msg").text("Thank You! (Click again to change)");
+                    }
+                )
+                .error(
+                    function() { 
+                        $.fn.raty.cancel('#userrating');
+                        $(".userrating-msg").text("Something went wrong...");
+                    }
+                );
+              }
+        });
+    });
+</script>
 {% endblock %}
