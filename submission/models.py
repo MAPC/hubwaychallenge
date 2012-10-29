@@ -47,6 +47,13 @@ class Entry(models.Model):
     def thumbnail_url(self):
         return '%s_tn%s' % (self.screenshot.url[:-4], self.screenshot.url[-4:])
 
+    def overall_judgerating(self):
+        return self.judgerating.get_rating()
+    overall_judgerating.short_description = 'Judge Rating'
+
+    def overall_publicrating(self):
+        return self.userrating.get_rating()
+    overall_publicrating.short_description = 'Public Rating'
 
 class JudgeNote(models.Model):
 
