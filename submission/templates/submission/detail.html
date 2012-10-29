@@ -136,11 +136,13 @@
 <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
 <script src="{{ STATIC_URL }}js/csrf.js"></script>
 <script src="{{ STATIC_URL }}raty/js/jquery.raty.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}lightbox/js/jquery.lightbox-0.5.pack.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}lightbox/js/jquery.lightbox-0.5-mod.min.js"></script>
 <script>
     $(function() {
         // activate lightbox
         $('a.lightbox').lightBox({
+            maxHeight: $(window).width(), 
+            maxWidth: $(window).height(),
             imageLoading: '{{ STATIC_URL }}lightbox/images/lightbox-ico-loading.gif',
             imageBtnClose: '{{ STATIC_URL }}lightbox/images/lightbox-btn-close.gif',
             imageBtnPrev: '{{ STATIC_URL }}lightbox/images/lightbox-btn-prev.gif',
