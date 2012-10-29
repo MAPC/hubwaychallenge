@@ -44,25 +44,25 @@
             <li>And what makes for a good Hubway location?</li>
         </ul>
         <p>To celebrate the release of comprehensive user data, Hubway and MAPC are inviting you to <span class="highgreen">visualize half a million Hubway rides.</span></p>
-
     </header>
     <section>
         <h2>How to Submit</h2>
         <p><a class="submission home" href="{% url add-entry %}">Submit your Data Viz!</a></p>
         <p>It is possible to submit more than one visualization per person or team.</p>
-    {% if lastentry %}</section>
-        <h2>Last Submitted Visualization</h2>
-        <p><a href="{{ lastentry.get_absolute_url }}" title="Hubway Data Visualization by {{ lastentry.name }}"><img class="screenshot tn" src="{{ lastentry.thumbnail_url }}" alt="Hubway Data Visualization by {{ lastentry.name }}"></a></p>
-        <p>By <a class="highgreen" href="{{ lastentry.get_absolute_url }}">{{ lastentry.name }}</a></p>
-        <p><span id="userrating" class="rating"></span><br>{% if user.is_authenticated %}<span class="help-text userrating-msg">Click stars to rate this visualization.</span>{% else %}<a href="/register/" class="help-text">Register to rate!</a>{% endif %}</p></p>
-        {% if lastentry.description %}<p>{{ lastentry.description|truncatewords_html:20 }}</p>{% endif %}
-    <section>{% endif %}
     </section>
     <section>
         <h2>Deadline</h2>
         <p class="highgreen">MIDNIGHT (11:59 p.m.) on Halloween, <br>Wednesday, October 31, 2012.</p>
         <p>Winners will be announced on Thursday, November 8, 2012.</p>
     </section>
+    {% if lastentry %}<section>
+        <h2>Last Submitted Visualization</h2>
+        <p><a href="{{ lastentry.get_absolute_url }}" title="Hubway Data Visualization by {{ lastentry.name }}"><img class="screenshot tn" src="{{ lastentry.thumbnail_url }}" alt="Hubway Data Visualization by {{ lastentry.name }}"></a></p>
+        <p>By <a class="highgreen" href="{{ lastentry.get_absolute_url }}">{{ lastentry.name }}</a></p>
+        <p><span id="userrating" class="rating"></span><br>{% if user.is_authenticated %}<span class="help-text userrating-msg">Click stars to rate this visualization.</span>{% else %}<a href="/register/" class="help-text">Register to rate!</a>{% endif %}</p></p>
+        {% if lastentry.description %}<p>{{ lastentry.description|truncatewords_html:20 }}</p>{% endif %}
+    </section>{% endif %}
+
     <section>
         <h2>The Judges</h2>
         <dl class="judges">
@@ -97,10 +97,6 @@
     <p>Visualizations, animations, maps, info graphics that tell us something new or illustrate the awesomeness of more than half a million bike trips in one year. Winning entries will be both smart and beautiful. Submissions are welcome in any form - anything, from website to sculpture can enter the challenge.</p>
     <h3>Who can enter?</h3>
     <p>Anyone! Pro and amateur; individuals, teams or studios; students, media, artists, corporations or those who only moonlight as data geeks.</p>
-    <h3>Join us for a Hack Day!</h3>
-    <p>Want to get out of the house and work with some friends? Come to the <a href="http://hubwaydatachallenge.eventbrite.com/" class="highgreen">Hack Day at The Bocoup Loft</a> in Downtown Boston on Saturday, October 27, 2012.
-    <a href="http://www.eventbrite.com/event/2715450987?ref=ebtnebregn" target="_blank"><img src="http://www.eventbrite.com/custombutton?eid=2715450987" alt="Eventbrite - Hubway Data Visualization Hack Day" /></a></p>
-
     <h3>What are the prizes?</h3>
     <p>Up to three members of the winning team (or teams!) will ride off in style with:</p>
     <ul>
