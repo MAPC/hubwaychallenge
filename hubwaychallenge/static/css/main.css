@@ -41,6 +41,12 @@ section h2 {
 	margin-top: 1.4em;
 }
 
+
+.main article {
+	padding: 0 30px;
+	width: 55%;
+}
+
 article, .main aside {
 	color: #4d4d4d;
 }
@@ -49,10 +55,7 @@ article, .main aside {
     border: none;
     background-color: #f7f6f4;
     margin-top: 20px;
-}
-
-.main article {
-	padding: 0 30px;
+    width: 25%;
 }
 
 aside h3, aside h3 a {
@@ -120,6 +123,17 @@ footer img {
 header.wrapper img {
 	float: left;
 	margin: 1.1em;
+}
+
+nav {
+        width: 5%;
+}
+nav ul {
+    float: right;
+}
+nav a {
+    width: 100%;
+    padding: 6px;
 }
 
 dd {
@@ -333,30 +347,131 @@ button.judgenote {
 
 /*** Media Queries ***/
 
-@media only screen and (min-width: 768px) {
+/* Large desktop */
+@media (min-width: 1200px) {}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
 
-	/* TODO: adjust font-sizes */
+	.main.wrapper {
+	    background: white;
+	    padding-top: 0px;
+	}
+
+	article header {
+    	font-size: 1.2em;
+    	line-height: 1.3em;
+    	background: white;
+    	margin-bottom: 0px;
+    	padding-bottom: 0px;
+	}
+
+	.main article {
+	    width: 50%;
+	}
 
 	.main aside {
-        width: 24%;
-    }
+	    width: 30%;
+	}
 
-    nav {
+	img.screenshot.tn, img.screenshot {
+		max-width: 100%;
+    	float: none;
+	}
+
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+
+	.header-container img {
+		max-width: 80px;
+	} 
+
+	.main.wrapper {
+	    background: white;
+	    padding-top: 0px;
+	}
+
+	.main article {
+	    width: 80%;
+	}
+
+	.main aside {
+	    width: 70%;
+	    margin-left: 10%;
+	}
+
+	img.screenshot.tn, img.screenshot {
+		max-width: 100%;
+    	float: none;
+	}
+
+	nav li:first-child a {
+		margin-left: 40%;
+	}
+
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {
+
+	.header-container img {
+		max-width: 80px;
+	} 
+
+	.main.wrapper {
+	    background: white;
+	    padding-top: 0px;
+	}
+
+	h1 {
+    	font-size: 1.6em;
+	}
+
+	nav {
         width: 5%;
     }
 	nav ul {
-	    float: right;
+	    float: left;
 	}
 	nav a {
         width: 100%;
         padding: 6px;
     }
 
-}
+	nav li:first-child a {
+		margin-left: 40%;
+	}
 
-@media only screen and (min-width: 480px) {
+	article header {
+    	font-size: 1.2em;
+    	line-height: 1.3em;
+    	background: white;
+    	margin-bottom: 0px;
+    	padding-bottom: 0px;
+	}
 
-    nav a {
-        padding:6px;
-    }
+	.main article {
+	    width: 80%;
+	}
+
+	.main aside {
+	    width: 70%;
+	    margin-left: 10%;
+	}
+
+	a.submission.home {
+    	background: #49AA43;
+    	width: 100%;
+    	padding-left: 0px;
+    	font-size: 1.3em;
+    	text-align: center;
+	}	
+
+	img.screenshot.tn, img.screenshot {
+		max-width: 100%;
+    	float: none;
+	}
+
 }
