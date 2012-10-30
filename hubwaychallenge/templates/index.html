@@ -159,7 +159,6 @@
 
 {% block extra_script %}
 {{ block.super }}
-<script src="{{ STATIC_URL }}js/csrf.js"></script>
 <script src="{{ STATIC_URL }}raty/js/jquery.raty.min.js"></script>
 <script>
     $(function() {
@@ -176,6 +175,7 @@
                 $.post("/submission/rate/" + {{ lastentry.id }},
                     {
                         score: score, 
+                        csrfmiddlewaretoken: "{{ csrf_token }}"
                     }
                 )
                 .success(
