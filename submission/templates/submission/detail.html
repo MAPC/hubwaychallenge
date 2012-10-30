@@ -51,7 +51,6 @@
             {% if entry.description %}<p>{{ entry.description }}</p>{% endif %}
             {% if entry.url %}<p><a href="{{ entry.url }}">{{ entry.url }}</a></p>{% endif %}
             {% if judge and entry.file %}<p>Additional download: <a href="{{ entry.file.url }}">{{ entry.filename }}</a></p>{% endif %}
-            {{ csrf_token }}
         </section>
     </article>
     <aside>
