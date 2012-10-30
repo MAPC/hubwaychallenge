@@ -154,6 +154,7 @@
             $.post('{{ entry.get_approval_url }}',
                     {
                         approved: 'True', 
+                        csrfmiddlewaretoken: "{{ csrf_token }}"
                     }
                 )
                 .success(
