@@ -55,6 +55,7 @@
     </article>
     <aside>
         <p>{% if not entry.approved %}<a class="approval" href="javascript:void(0)">Approve</a>{% endif %}</p>
+        <h3>View more visualizations</h3>
         <ul class="navigation">
             {% if previous %}<li><a class="highgreen" href="{{ previous.get_absolute_url }}"><div class="previous" style="background-image:url('{{ previous.thumbnail_url }}')"><span>&larr; previous</span></div></a></li>{% endif %}
             {% if next %}<li><a class="highgreen" href="{{ next.get_absolute_url }}"><div class="next" style="background-image:url('{{ next.thumbnail_url }}')"><span>next &rarr;</span></div></a></li>{% endif %}

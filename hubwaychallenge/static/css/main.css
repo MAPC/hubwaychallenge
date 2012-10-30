@@ -306,7 +306,6 @@ ul.navigation li {
 ul.navigation li a div {
 	text-decoration: none;
 	font-weight: 700;
-	font-size: 0.8em;
 	background-repeat: no-repeat;
 	padding: 20px 0px;
 	background-position: center;
@@ -315,7 +314,7 @@ ul.navigation li a div {
 }
 
 ul.navigation li a div span {
-	background-color: rgba(255, 255, 255, 0.8);
+	background-color: rgba(255, 255, 255, 0.9);
 	padding: 6px;
 }
 
