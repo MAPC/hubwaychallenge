@@ -235,7 +235,8 @@
                     {
                         {% if judgenote %}id: {{ judgenote.id }},{% endif %}
                         note: $("textarea.judgenote").val(), 
-                        entry: {{ entry.id }}
+                        entry: {{ entry.id }},
+                        csrfmiddlewaretoken: "{{ csrf_token }}"
                     }
                 )
                 .success(
