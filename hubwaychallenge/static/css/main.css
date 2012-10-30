@@ -37,6 +37,10 @@ a {
     line-height: 1.3em;   
 }
 
+.alert {
+	color: #B94A48;
+}
+
 section h2 {
 	margin-top: 1.4em;
 }
