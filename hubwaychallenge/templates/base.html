@@ -71,8 +71,17 @@
 
         <script src="{{ STATIC_URL }}initializr/js/main.js"></script>
 
-        {% block extra_script %}{% endblock %}
+        <script>
+            $(function() {
+                var hoy = new Date();
+                var hoy_mesdia = hoy.getMonth()+1 + "-" + hoy.getDate();
+                if (hoy_mesdia === "11-1") {
+                    $(".main.wrapper").css("background", "white url('{{ STATIC_URL }}img/dia-de-los-muertos-bg.jpg') repeat-x");
+                }
+            });
+        </script>
 
+        {% block extra_script %}{% endblock %}
 
         <script>
             var _gaq=[['_setAccount','UA-5547782-18'],['_trackPageview']];

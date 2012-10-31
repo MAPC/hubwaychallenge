@@ -3,11 +3,11 @@
 {% block title %}Submit your data visualization | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <article{% if diadelosmuertos %} class="dia-de-los-muertos"{% endif %}>
+    <article>
         <section>
             <h2>Submit your data visualization</h2>
             <p>Please enter your name, email and upload your visualization image. If you have additional resources, like a link, other files or a short description, even better, add everything to your submission.</p>
-            <p>Deadline is October 31<sup>st</sup> 2012, 11:59pm EDT.{% if diadelosmuertos %} <span class="dia-de-los-muertos">...llega tarde...</span>{% endif %}</p> 
+            <p>Deadline is October 31<sup>st</sup> 2012, 11:59pm EDT.</p> 
             <p><form action="" class="submission" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ entryform.non_field_errors }}
