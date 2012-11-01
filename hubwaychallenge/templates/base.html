@@ -75,7 +75,8 @@
             $(function() {
                 var hoy = new Date();
                 var hoy_mesdia = hoy.getMonth()+1 + "-" + hoy.getDate();
-                if (hoy_mesdia === "11-1") {
+                var wrapper_bg = $(".main.wrapper").css("background-image");
+                if (hoy_mesdia === "11-1" && wrapper_bg !== "none") {
                     $(".main.wrapper").css("background", "white url('{{ STATIC_URL }}img/dia-de-los-muertos-bg.jpg') repeat-x");
                 }
             });
