@@ -1,10 +1,11 @@
 from django.template import RequestContext
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.cache import never_cache
 from django.core.exceptions import ObjectDoesNotExist
+from django.conf import settings
 
 from PIL import Image
 from datetime import datetime
@@ -25,24 +26,26 @@ def vis_thumbnail(visimage):
 
 @never_cache
 def add(request):
-    """ Add new entry """
+    """ Add new entry before deadline """
 
-    # save form
-    if request.method == 'POST':
-        new_entry = Entry()
-        entryform = EntryForm(request.POST, request.FILES, instance=new_entry)
-        if entryform.is_valid():
-            if request.user.is_authenticated():
-                new_entry.user = request.user
-            entryform.save()
-            vis_thumbnail(new_entry.screenshot)
-            return render_to_response('submission/thankyou.html', locals(), context_instance=RequestContext(request))
-    # show empty form
+    if datetime.now() > datetime.strptime(settings.DEADLINE, '%Y-%m-%d %H:%M'):
+        return redirect('/')
     else:
-        user = request.user
-        entryform = EntryForm()
-
-    return render_to_response('submission/add.html', locals(), context_instance=RequestContext(request))
+        # save form
+        if request.method == 'POST':
+            new_entry = Entry()
+            entryform = EntryForm(request.POST, request.FILES, instance=new_entry)
+            if entryform.is_valid():
+                if request.user.is_authenticated():
+                    new_entry.user = request.user
+                entryform.save()
+                vis_thumbnail(new_entry.screenshot)
+                return render_to_response('submission/thankyou.html', locals(), context_instance=RequestContext(request))
+        # show empty form
+        else:
+            user = request.user
+            entryform = EntryForm()
+        return render_to_response('submission/add.html', locals(), context_instance=RequestContext(request))
 
 def get_first_obj(qs):
     if qs:

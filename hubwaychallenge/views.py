@@ -2,6 +2,9 @@ from django.contrib.auth import logout
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+
+from datetime import datetime
 
 from submission.models import Entry
 
@@ -9,6 +12,9 @@ from tastypie.models import ApiKey
 
 def home(request):
 	entries = Entry.objects.filter(approved=True).reverse()
+
+	submission_open = (datetime.now() < datetime.strptime(settings.DEADLINE, '%Y-%m-%d %H:%M'))
+
 	if entries:
 		lastentry = entries[0]
 	return render_to_response('index.html', locals(), context_instance=RequestContext(request))

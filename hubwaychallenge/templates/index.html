@@ -45,7 +45,7 @@
         </ul>
         <p>To celebrate the release of comprehensive user data, Hubway and MAPC are inviting you to <span class="highgreen">visualize half a million Hubway rides.</span></p>
     </header>
-    <section>
+    {% if submission_open %}<section>
         <h2>How to Submit</h2>
         <p><a class="submission home" href="{% url add-entry %}">Submit your Data Viz!</a></p>
         <p>It is possible to submit more than one visualization per person or team.</p>
@@ -54,7 +54,7 @@
         <h2>Deadline <span class="alert">- Extended!</span></h2>
         <p class="highgreen">11:59 p.m. EDT on Sunday, November 4, 2012</p>
         <p>Winners will be announced on Tuesday, November 13, 2012.</p>
-    </section>
+    </section>{% endif %}
     {% if lastentry %}<section>
         <h2>Last Submitted Visualization</h2>
         <p><a href="{{ lastentry.get_absolute_url }}" title="Hubway Data Visualization by {{ lastentry.name }}"><img class="screenshot tn" src="{{ lastentry.thumbnail_url }}" alt="Hubway Data Visualization by {{ lastentry.name }}"></a></p>

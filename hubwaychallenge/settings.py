@@ -198,6 +198,10 @@ LOGIN_ERROR_URL = '/login-error/'
 XS_SHARING_ALLOWED_ORIGINS = '*'
 XS_SHARING_ALLOWED_METHODS = ['GET']
 
+# Hubway challenge
+# datetime string as '%Y-%m-%d %H:%M'
+DEADLINE = '2012-11-05 12:00'
+
 try:
     from local_settings import *
 except ImportError:
