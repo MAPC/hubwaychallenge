@@ -26,7 +26,7 @@ a {
 	color: #00467F;
 }
 
-.header-container a {
+.header-container a, .leaderboard a {
 	text-decoration: none;
 }
 
@@ -328,6 +328,38 @@ div.judgerating {
 button.judgenote {
 	margin-right: 8px;
 	font-size: 0.8em;
+}
+
+ul.leaderboard {
+	padding-left: 0px;
+}
+
+.leaderboard img.screenshot {
+	max-height: 80px;
+	margin-right: 10px;
+	float: left;
+}
+
+.leaderboard li {
+	cursor: pointer;
+	list-style-type: none;
+	clear: both;
+	background-repeat: repeat-x;
+	background-position: center;
+	padding: 20px 0px;
+	border-bottom: 1px solid #268c26;
+	margin-bottom: 1px;
+}
+
+.leaderboard li:last-child {
+	border-bottom: none;
+	margin-bottom: 0px;
+}
+
+.leaderboard li div.text {
+	background-color: rgba(255, 255, 255, 0.8);
+	width: 100%;
+	text-align: center;
 }
 
 /*** Media Queries ***/

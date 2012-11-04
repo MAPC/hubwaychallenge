@@ -10,4 +10,5 @@ urlpatterns = patterns('submission.views',
     url('^judgerate/(?P<id>\d+)$', 'judgerate', name='judgerate-entry'),
     url('^judgenote/', 'judgenote', name='judgenote'),
     url('^approve/(?P<id>\d+)$', 'approve', name='approve-entry'),
+    url('^leaderboard/', 'leaderboard', name='leaderboard')
 )

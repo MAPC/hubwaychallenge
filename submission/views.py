@@ -6,6 +6,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.cache import never_cache
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
+from django.db.models import Sum
 
 from PIL import Image
 from datetime import datetime
@@ -136,5 +137,15 @@ def approve(request, id):
     except:
         return HttpResponse(status=500)
 
+def leaderboard(request):
+    if request.user.is_staff:
+        entries = Entry.objects.all().filter(approved=True).order_by('-judgerating_score', '-userrating_score')
+        judgerating_votes_aggr = Entry.objects.all().aggregate(Sum('judgerating_votes'))
+        judgerating_votes_sum = judgerating_votes_aggr['judgerating_votes__sum']
+    else:
+        entries = Entry.objects.all().filter(approved=True).order_by('-userrating_score')
 
+    userrating_votes_aggr = Entry.objects.all().aggregate(Sum('userrating_votes'))
+    userrating_votes_sum = userrating_votes_aggr['userrating_votes__sum']
+    return render_to_response('submission/leaderboard.html', locals(), context_instance=RequestContext(request))
 
