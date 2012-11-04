@@ -138,12 +138,16 @@ def approve(request, id):
         return HttpResponse(status=500)
 
 def leaderboard(request):
-    entries = Entry.objects.all().filter(approved=True)
+    entries = Entry.objects.all().filter(approved=True, userrating_votes__gt=0)
     entries = entries.extra(select={
         'userrating_weighted': '((100/%s*userrating_score/userrating_votes+%s)+100)/2' % (Entry.userrating.range, Entry.userrating.weight),
-        'judgerating_weighted': '((100/%s*judgerating_score/judgerating_votes+%s)+100)/2' % (Entry.judgerating.range, Entry.judgerating.weight),
     })
+    
     if request.user.is_staff:
+        entries = entries.filter(judgerating_votes__gt=0)
+        entries = entries.extra(select={
+           'judgerating_weighted': '((100/%s*judgerating_score/judgerating_votes+%s)+100)/2' % (Entry.judgerating.range, Entry.judgerating.weight),
+        })
         entries = entries.order_by('-judgerating_weighted')
         judgerating_votes_aggr = entries.aggregate(Sum('judgerating_votes'))
         judgerating_votes_sum = judgerating_votes_aggr['judgerating_votes__sum']
