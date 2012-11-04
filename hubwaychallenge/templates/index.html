@@ -56,8 +56,7 @@
         <p>Winners will be announced on Tuesday, November 13, 2012.</p>
     </section>{% else %}
     <section>
-        <h2>Public Rating Leaderboard</h2>
-        <p>3 top-rated visualizations:</p>
+        <h2>Top-rated visualizations</h2>
         <ul class="leaderboard">
             {% for entry in entries %}
             {% if forloop.counter0 < 3 %}<li data-rating="{{ entry.userrating.get_rating }}" style="background-image:url('{{ entry.thumbnail_url }}')"><div class="text">By <a href="{% url leaderboard %}" title="{{ entry.description }}" class="highgreen">{{ entry.name }}</a><br> <span class="stars"></span></div></li>{% endif %}

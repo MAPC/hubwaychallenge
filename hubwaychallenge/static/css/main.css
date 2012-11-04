@@ -346,9 +346,9 @@ ul.leaderboard {
 	clear: both;
 	background-repeat: repeat-x;
 	background-position: center;
-	padding: 20px 0px;
+	padding-top: 50px;
 	border-bottom: 2px solid #268c26;
-	margin-bottom: 1px;
+	margin-bottom: 10px;
 }
 
 .leaderboard li:last-child {
