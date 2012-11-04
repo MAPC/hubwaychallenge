@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load markup %}
 {% load admin_urls %}
 {% load ratings %}
 
@@ -48,7 +49,7 @@
         <section>
             <p><a href="{{ entry.screenshot.url }}" class="lightbox" title="{{ entry.description }}"><img class="screenshot" src="{{ entry.thumbnail_url }}"></a></p>
             <p>By <span class="highgreen">{{ entry.name }}</p>
-            {% if entry.description %}<p>{{ entry.description }}</p>{% endif %}
+            {% if entry.description %}<p>{{ entry.description|markdown:"safe" }}</p>{% endif %}
             {% if entry.url %}<p><a href="{{ entry.url }}">{{ entry.url }}</a></p>{% endif %}
             {% if entry.file %}<p>Additional download: <a href="{{ entry.file.url }}">{{ entry.filename }}</a></p>{% endif %}
         </section>
