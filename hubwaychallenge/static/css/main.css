@@ -26,6 +26,11 @@ a {
 	color: #00467F;
 }
 
+p {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .header-container a, .leaderboard a {
 	text-decoration: none;
 }
