@@ -18,7 +18,11 @@ def home(request):
         entries = Entry.objects.filter(approved=True).reverse()
         lastentry = entries[0]
     else:
-        entries = Entry.objects.all().filter(approved=True).order_by('-userrating_score')
+        entries = Entry.objects.all().filter(approved=True)
+        entries = entries.extra(select={
+            'userrating_weighted': '((100/%s*userrating_score/userrating_votes+%s)+100)/2' % (Entry.userrating.range, Entry.userrating.weight),
+        })
+        entries = entries.order_by('-userrating_weighted')
     
     return render_to_response('index.html', locals(), context_instance=RequestContext(request))
 

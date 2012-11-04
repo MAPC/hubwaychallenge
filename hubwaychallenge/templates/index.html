@@ -57,13 +57,13 @@
     </section>{% else %}
     <section>
         <h2>Public Voting Leaderboard</h2>
-        <p>Best-rated 3 out of {{ entries|length }} visualizations:</p>
+        <p>3 top-rated visualizations:</p>
         <ul class="leaderboard">
             {% for entry in entries %}
             {% if forloop.counter0 < 3 %}<li data-rating="{{ entry.userrating.get_rating }}" style="background-image:url('{{ entry.thumbnail_url }}')"><div class="text">By <a href="{% url leaderboard %}" title="{{ entry.description }}" class="highgreen">{{ entry.name }}</a><br> <span class="stars"></span></div></li>{% endif %}
             {% endfor %}
         </ul>
-        <p><a href="{% url leaderboard %}" class="highgreen">View all!</a></p>
+        <p><a href="{% url leaderboard %}" class="highgreen">View all {{ entries|length }} visualizations!</a></p>
     </section>{% endif %}
     {% if lastentry %}<section>
         <h2>Last Submitted Visualization</h2>
