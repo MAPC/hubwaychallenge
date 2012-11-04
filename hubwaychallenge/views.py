@@ -11,13 +11,16 @@ from submission.models import Entry
 from tastypie.models import ApiKey
 
 def home(request):
-	entries = Entry.objects.filter(approved=True).reverse()
-
-	submission_open = (datetime.now() < datetime.strptime(settings.DEADLINE, '%Y-%m-%d %H:%M'))
-
-	if entries:
-		lastentry = entries[0]
-	return render_to_response('index.html', locals(), context_instance=RequestContext(request))
+    
+    submission_open = (datetime.now() < datetime.strptime(settings.DEADLINE, '%Y-%m-%d %H:%M'))
+    
+    if submission_open:
+        entries = Entry.objects.filter(approved=True).reverse()
+        lastentry = entries[0]
+    else:
+        entries = Entry.objects.all().filter(approved=True).order_by('-userrating_score')
+    
+    return render_to_response('index.html', locals(), context_instance=RequestContext(request))
 
 def logout_view(request):
     logout(request)
