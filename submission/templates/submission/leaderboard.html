@@ -43,7 +43,7 @@
             <p>Below are the results of {{ userrating_votes_sum }} public votes{% if user.is_staff %} ({{ judgerating_votes_sum }} judge votes){% endif %} on {{ entries|length }} challenge submissions:</p>
             <ul class="leaderboard">
                 {% for entry in entries %}
-                <li data-rating="{{ entry.userrating.get_rating }}" style="background-image:url('{{ entry.thumbnail_url }}')"><div class="text">By <a href="{{ entry.get_absolute_url }}" title="{{ entry.description }}" class="highgreen">{{ entry.name }}</a>{% if user.is_staff %} ({{ entry.judgerating.get_rating }}){% endif %}<br> <span class="stars"></span></div></li>
+                <li data-rating="{{ entry.userrating.get_rating|floatformat:2 }}" style="background-image:url('{{ entry.thumbnail_url }}')"><div class="text">By <a href="{{ entry.get_absolute_url }}" title="{{ entry.description }}" class="highgreen">{{ entry.name }}</a>{% if user.is_staff %} ({{ entry.judgerating.get_rating|floatformat:2 }}){% endif %}<br> <span class="stars"></span></div></li>
                 {% endfor %}
             </ul>
         </section>

@@ -138,14 +138,19 @@ def approve(request, id):
         return HttpResponse(status=500)
 
 def leaderboard(request):
+    entries = Entry.objects.all().filter(approved=True)
+    entries = entries.extra(select={
+        'userrating_weighted': '((100/%s*userrating_score/userrating_votes+%s)+100)/2' % (Entry.userrating.range, Entry.userrating.weight),
+        'judgerating_weighted': '((100/%s*judgerating_score/judgerating_votes+%s)+100)/2' % (Entry.judgerating.range, Entry.judgerating.weight),
+    })
     if request.user.is_staff:
-        entries = Entry.objects.all().filter(approved=True).order_by('-judgerating_score', '-userrating_score')
-        judgerating_votes_aggr = Entry.objects.all().aggregate(Sum('judgerating_votes'))
+        entries = entries.order_by('-judgerating_weighted')
+        judgerating_votes_aggr = entries.aggregate(Sum('judgerating_votes'))
         judgerating_votes_sum = judgerating_votes_aggr['judgerating_votes__sum']
     else:
-        entries = Entry.objects.all().filter(approved=True).order_by('-userrating_score')
+        entries = entries.order_by('-userrating_weighted')
 
-    userrating_votes_aggr = Entry.objects.all().aggregate(Sum('userrating_votes'))
+    userrating_votes_aggr = entries.aggregate(Sum('userrating_votes'))
     userrating_votes_sum = userrating_votes_aggr['userrating_votes__sum']
     return render_to_response('submission/leaderboard.html', locals(), context_instance=RequestContext(request))
 
