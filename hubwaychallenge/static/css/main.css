@@ -4,35 +4,30 @@
    =================== */
 
 body {
-	font-family: 'Lato', sans-serif;
-	background-image: url('../img/bg.png')
+    font-family: 'Lato', sans-serif;
+    background-image: url('../img/bg.png')
 }
 
 h1 {
-	font-weight: 300;
-	font-size: 3em;
+    font-weight: 300;
+    font-size: 3em;
 }
 
 h2 {
-	clear: both;
+    clear: both;
 }
 
 h2, h3 {
-	font-weight: 400;
-	text-shadow: 0px 1px 1px rgba(77, 77, 77, 0.4);
+    font-weight: 400;
+    text-shadow: 0px 1px 1px rgba(77, 77, 77, 0.4);
 }
 
 a {
-	color: #00467F;
-}
-
-p {
-	overflow: hidden;
-	text-overflow: ellipsis;
+    color: #00467F;
 }
 
 .header-container a, .leaderboard a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .title {
@@ -43,21 +38,21 @@ p {
 }
 
 .alert {
-	color: #B94A48;
+    color: #B94A48;
 }
 
 section h2 {
-	margin-top: 1.4em;
+    margin-top: 1.4em;
 }
 
 
 .main article {
-	padding: 0 30px;
-	width: 55%;
+    padding: 0 30px;
+    width: 55%;
 }
 
 article, .main aside {
-	color: #4d4d4d;
+    color: #4d4d4d;
 }
 
 .main aside {
@@ -68,56 +63,56 @@ article, .main aside {
 }
 
 aside h3, aside h3 a {
-	color: #49aa43;
-	clear: both;
+    color: #49aa43;
+    clear: both;
 }
 
 aside.rules p {
-	font-size: 0.8em;
-	line-height: 1.2em;
+    font-size: 0.8em;
+    line-height: 1.2em;
 }
 
 aside textarea {
-	font-size: 0.8em;
-	width: 80%;
+    font-size: 0.8em;
+    width: 80%;
 }
 
 article header {
-	font-size: 1.4em;
-	line-height: 1.4em;
-	background: url("../img/bg_article_header.png") no-repeat bottom center;
-	padding-bottom: 20px;
-	margin-bottom: 30px;
+    font-size: 1.4em;
+    line-height: 1.4em;
+    background: url("../img/bg_article_header.png") no-repeat bottom center;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 article header ul {
-	line-height: 1.8em;
-	list-style-image: url("../img/arrow-bullet.png")
+    line-height: 1.8em;
+    list-style-image: url("../img/arrow-bullet.png")
 }
 
 .footer-container footer {
-	text-align: center;
-	background: white url("../img/bg_article_footer.png") repeat-x 3px top;
-	color: #4d4d4d;
+    text-align: center;
+    background: white url("../img/bg_article_footer.png") repeat-x 3px top;
+    color: #4d4d4d;
 }
 
 footer img {
-	margin: 10px;
+    margin: 10px;
 }
 
 .footer-container {
-	background: none;
-	border-top: none;
+    background: none;
+    border-top: none;
 }
 
 .highgreen, dt {
-	font-weight: 700;
-	color: #49aa43;
+    font-weight: 700;
+    color: #49aa43;
 }
 
 .main.wrapper {
-	background: white url('../img/map.jpg') top center no-repeat;
-	padding-top: 110px;
+    background: white url('../img/map.jpg') top center no-repeat;
+    padding-top: 110px;
 }
 
 .header-container {
@@ -129,8 +124,8 @@ footer img {
 }
 
 header.wrapper img {
-	float: left;
-	margin: 1.1em;
+    float: left;
+    margin: 1.1em;
 }
 
 nav {
@@ -145,35 +140,35 @@ nav a {
 }
 
 dd {
-	margin-left: 0px;
-	margin-bottom: 10px;
+    margin-left: 0px;
+    margin-bottom: 10px;
 }
 
 dd img.headshot {
-	float: left;
-	padding-top: 4px;
-	margin-right: 10px;
+    float: left;
+    padding-top: 4px;
+    margin-right: 10px;
 }
 
 dl.judges dd:last-child {
-	margin-bottom: 100px;
+    margin-bottom: 100px;
 }
 
 a.btn.dl {
-	display: block; 
-	width: 155px; 
-	height: 43px; 
-	background: url(../img/btn_dl.png) no-repeat top left; 
-	line-height: 43px;
-	padding-left: 45px;
-	overflow: hidden;
-	color: white;
-	text-decoration: none;
+    display: block; 
+    width: 155px; 
+    height: 43px; 
+    background: url(../img/btn_dl.png) no-repeat top left; 
+    line-height: 43px;
+    padding-left: 45px;
+    overflow: hidden;
+    color: white;
+    text-decoration: none;
 }
 
 .help-text {
-	font-size: 0.8em;
-	text-shadow: none;
+    font-size: 0.8em;
+    text-shadow: none;
 }
 
 nav a {
@@ -181,190 +176,195 @@ nav a {
 }
 
 ul.socialmedia { 
-	list-style: none;
+    list-style: none;
 }
 
 
 dl.api {
-	background-color: #F7F6F4;
-	padding: 20px;
+    background-color: #F7F6F4;
+    padding: 20px;
     -webkit-box-shadow: 0 5px 10px #aaa;
        -moz-box-shadow: 0 5px 10px #aaa;
             box-shadow: 0 5px 10px #aaa;
 }
 
 dl.api dt {
-	float: left;
-	width: 100px;
-	overflow: hidden;
-	clear: left;
-	white-space: nowrap;
+    float: left;
+    width: 100px;
+    overflow: hidden;
+    clear: left;
+    white-space: nowrap;
 }
 
 dl.api dd {
-	margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 code {
-	font-size: 0.9em;
+    font-size: 0.9em;
 }
 
 .submission label {
-	float: left;
-	width: 220px;
-	overflow: hidden;
-	clear: left;
+    float: left;
+    width: 220px;
+    overflow: hidden;
+    clear: left;
 }
 
 .submission textarea, .submission input[type='text'] {
-	width: 320px;
-	padding: 0.4em;
+    width: 320px;
+    padding: 0.4em;
 }
 
 .submission .field {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .submission .form-action, .submission .help-text {
-	padding-left: 220px;
+    padding-left: 220px;
 }
 
 .submission .help-text {
-	float: left;
-	margin-bottom: 20px;
-	line-height: 1.4em;
+    float: left;
+    margin-bottom: 20px;
+    line-height: 1.4em;
 }
 
 .submission input[type='checkbox'] {
-	margin-right: 0.4em;
+    margin-right: 0.4em;
 }
 
 button.submission, a.submission.home {
-	display: block; 
-	border: none;
-	height: 48px;
-	line-height: 48px;
-	overflow: hidden;
-	color: white;
-	text-decoration: none;
-	font-weight: 300;
-	font-size: 1.4em;
+    display: block; 
+    border: none;
+    height: 48px;
+    line-height: 48px;
+    overflow: hidden;
+    color: white;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 1.4em;
 }
 
 button.submission {
-	width: 200px; 
-	background: url(../img/btn_submit.png) no-repeat top left; 
-	padding-left: 0px;
+    width: 200px; 
+    background: url(../img/btn_submit.png) no-repeat top left; 
+    padding-left: 0px;
 }
 
 a.submission.home {
-	width: 288px; 
-	background: url(../img/btn_submit_lg.png) no-repeat top left; 
-	padding-left: 20px;
+    width: 288px; 
+    background: url(../img/btn_submit_lg.png) no-repeat top left; 
+    padding-left: 20px;
 }
 
 
 .errorlist {
-	padding-left: 220px;
-	color: red;
-	list-style: none;
-	margin-bottom: 0px;
+    padding-left: 220px;
+    color: red;
+    list-style: none;
+    margin-bottom: 0px;
+}
+
+.detail p {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 img.screenshot {
-	max-width: 580px;
+    max-width: 580px;
 }
 
 img.screenshot.tn {
-	max-width: 300px;
-	float: left;
-	margin-bottom: 20px;
-	margin-right: 20px;
+    max-width: 300px;
+    float: left;
+    margin-bottom: 20px;
+    margin-right: 20px;
 }
 
 ul.navigation {
-	padding-left: 0px;
-	margin-top: 0px;
-	margin-bottom: 100px;
+    padding-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 100px;
 }
 
 ul.navigation li {
-	display: inline;
-	list-style-type: none;
-	
+    display: inline;
+    list-style-type: none;
+    
 }
 
 ul.navigation li a div {
-	text-decoration: none;
-	font-weight: 700;
-	background-repeat: no-repeat;
-	padding: 20px 0px;
-	background-position: center;
-	width: 50%;
-	float: left;
+    text-decoration: none;
+    font-weight: 700;
+    background-repeat: no-repeat;
+    padding: 20px 0px;
+    background-position: center;
+    width: 50%;
+    float: left;
 }
 
 ul.navigation li a div span {
-	background-color: rgba(255, 255, 255, 0.9);
-	padding: 6px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 6px;
 }
 
 ul.navigation li:last-child {
-	padding-right: 0px;
+    padding-right: 0px;
 }
 
 ul.navigation li a div.next {
-	text-align: right;
+    text-align: right;
 }
 
 div.judgerating {
-	border: 4px solid #268C26;
-	padding: 0px 1em;
+    border: 4px solid #268C26;
+    padding: 0px 1em;
 }
 
 .judgerating h3 {
-	margin-bottom: 0px
+    margin-bottom: 0px
 }
 
 .judgerating p {
-	margin-top: 0px;
+    margin-top: 0px;
 }
 
 button.judgenote {
-	margin-right: 8px;
-	font-size: 0.8em;
+    margin-right: 8px;
+    font-size: 0.8em;
 }
 
 ul.leaderboard {
-	padding-left: 0px;
+    padding-left: 0px;
 }
 
 .leaderboard img.screenshot {
-	max-height: 80px;
-	margin-right: 10px;
-	float: left;
+    max-height: 80px;
+    margin-right: 10px;
+    float: left;
 }
 
 .leaderboard li {
-	cursor: pointer;
-	list-style-type: none;
-	clear: both;
-	background-repeat: repeat-x;
-	background-position: center;
-	padding-top: 50px;
-	border-bottom: 2px solid #268c26;
-	margin-bottom: 10px;
+    cursor: pointer;
+    list-style-type: none;
+    clear: both;
+    background-repeat: repeat-x;
+    background-position: center;
+    padding-top: 50px;
+    border-bottom: 2px solid #268c26;
+    margin-bottom: 10px;
 }
 
 .leaderboard li:last-child {
-	border-bottom: none;
-	margin-bottom: 0px;
+    border-bottom: none;
+    margin-bottom: 0px;
 }
 
 .leaderboard li div.text {
-	background-color: rgba(255, 255, 255, 0.8);
-	width: 100%;
-	text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    text-align: center;
 }
 
 /*** Media Queries ***/
@@ -375,125 +375,125 @@ ul.leaderboard {
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
 
-	.main.wrapper {
-	    background: white;
-	    padding-top: 0px;
-	}
+    .main.wrapper {
+        background: white;
+        padding-top: 0px;
+    }
 
-	article header {
-    	font-size: 1.2em;
-    	line-height: 1.3em;
-    	background: white;
-    	margin-bottom: 0px;
-    	padding-bottom: 0px;
-	}
+    article header {
+        font-size: 1.2em;
+        line-height: 1.3em;
+        background: white;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+    }
 
-	.main article {
-	    width: 50%;
-	}
+    .main article {
+        width: 50%;
+    }
 
-	.main aside {
-	    width: 30%;
-	}
+    .main aside {
+        width: 30%;
+    }
 
-	img.screenshot.tn, img.screenshot {
-		max-width: 100%;
-    	float: none;
-	}
+    img.screenshot.tn, img.screenshot {
+        max-width: 100%;
+        float: none;
+    }
 
 }
  
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
 
-	.header-container img {
-		max-width: 80px;
-	} 
+    .header-container img {
+        max-width: 80px;
+    } 
 
-	.main.wrapper {
-	    background: white;
-	    padding-top: 0px;
-	}
+    .main.wrapper {
+        background: white;
+        padding-top: 0px;
+    }
 
-	.main article {
-	    width: 80%;
-	}
+    .main article {
+        width: 80%;
+    }
 
-	.main aside {
-	    width: 70%;
-	    margin-left: 10%;
-	}
+    .main aside {
+        width: 70%;
+        margin-left: 10%;
+    }
 
-	img.screenshot.tn, img.screenshot {
-		max-width: 100%;
-    	float: none;
-	}
+    img.screenshot.tn, img.screenshot {
+        max-width: 100%;
+        float: none;
+    }
 
-	nav li:first-child a {
-		margin-left: 40%;
-	}
+    nav li:first-child a {
+        margin-left: 40%;
+    }
 
 }
  
 /* Landscape phones and down */
 @media (max-width: 480px) {
 
-	.header-container img {
-		max-width: 80px;
-	} 
+    .header-container img {
+        max-width: 80px;
+    } 
 
-	.main.wrapper {
-	    background: white;
-	    padding-top: 0px;
-	}
+    .main.wrapper {
+        background: white;
+        padding-top: 0px;
+    }
 
-	h1 {
-    	font-size: 1.6em;
-	}
+    h1 {
+        font-size: 1.6em;
+    }
 
-	nav {
+    nav {
         width: 5%;
     }
-	nav ul {
-	    float: left;
-	}
-	nav a {
+    nav ul {
+        float: left;
+    }
+    nav a {
         width: 100%;
         padding: 6px;
     }
 
-	nav li:first-child a {
-		margin-left: 40%;
-	}
+    nav li:first-child a {
+        margin-left: 40%;
+    }
 
-	article header {
-    	font-size: 1.2em;
-    	line-height: 1.3em;
-    	background: white;
-    	margin-bottom: 0px;
-    	padding-bottom: 0px;
-	}
+    article header {
+        font-size: 1.2em;
+        line-height: 1.3em;
+        background: white;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+    }
 
-	.main article {
-	    width: 80%;
-	}
+    .main article {
+        width: 80%;
+    }
 
-	.main aside {
-	    width: 70%;
-	    margin-left: 10%;
-	}
+    .main aside {
+        width: 70%;
+        margin-left: 10%;
+    }
 
-	a.submission.home {
-    	background: #49AA43;
-    	width: 100%;
-    	padding-left: 0px;
-    	font-size: 1.3em;
-    	text-align: center;
-	}	
+    a.submission.home {
+        background: #49AA43;
+        width: 100%;
+        padding-left: 0px;
+        font-size: 1.3em;
+        text-align: center;
+    }   
 
-	img.screenshot.tn, img.screenshot {
-		max-width: 100%;
-    	float: none;
-	}
+    img.screenshot.tn, img.screenshot {
+        max-width: 100%;
+        float: none;
+    }
 
 }
