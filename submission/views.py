@@ -29,7 +29,7 @@ def vis_thumbnail(visimage):
 def add(request):
     """ Add new entry before deadline """
 
-    if datetime.now() > datetime.strptime(settings.DEADLINE, '%Y-%m-%d %H:%M'):
+    if datetime.now() > datetime.strptime(settings.DEADLINE_SUBMISSION, '%Y-%m-%d %H:%M'):
         return redirect('/')
     else:
         # save form

@@ -200,7 +200,7 @@ XS_SHARING_ALLOWED_METHODS = ['GET']
 
 # Hubway challenge
 # datetime string as '%Y-%m-%d %H:%M'
-DEADLINE = '2012-11-05 12:00'
+DEADLINE_SUBMISSION = '2012-11-05 12:00'
 
 try:
     from local_settings import *

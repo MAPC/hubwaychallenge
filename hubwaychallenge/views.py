@@ -12,7 +12,7 @@ from tastypie.models import ApiKey
 
 def home(request):
     
-    submission_open = (datetime.now() < datetime.strptime(settings.DEADLINE, '%Y-%m-%d %H:%M'))
+    submission_open = (datetime.now() < datetime.strptime(settings.DEADLINE_SUBMISSION, '%Y-%m-%d %H:%M'))
     
     if submission_open:
         entries = Entry.objects.filter(approved=True).reverse()
