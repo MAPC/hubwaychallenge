@@ -45,7 +45,7 @@ class Entry(models.Model):
         return os.path.basename(self.file.name)
 
     def thumbnail_url(self):
-        return '%s_tn%s' % (self.screenshot.url[:-4], self.screenshot.url[-4:])
+        return '%s_tn.png' % (self.screenshot.url[:-4])
 
     def overall_judgerating(self):
         return self.judgerating.get_rating()

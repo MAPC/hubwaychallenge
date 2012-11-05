@@ -22,7 +22,7 @@ def vis_thumbnail(visimage):
     """
     tn = Image.open(visimage.path)
     tn.thumbnail((580, 386), Image.ANTIALIAS)
-    tnpath = '%s_tn%s' % (visimage.path[:-4], visimage.path[-4:])
+    tnpath = '%s_tn.png' % (visimage.path[:-4])
     tn.save(tnpath, 'PNG', optimize=True)
 
 @never_cache
