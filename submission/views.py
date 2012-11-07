@@ -54,7 +54,7 @@ def get_first_obj(qs):
     else:
         return False
 
-
+@never_cache
 def detail(request, id):
     """ Render detail page for an entry """
     entry = get_object_or_404(Entry, pk=id)
@@ -77,6 +77,7 @@ def detail(request, id):
     return render_to_response('submission/detail.html', locals(), context_instance=RequestContext(request))
 
 @login_required
+@never_cache
 def rate(request, id):
     """ Handler for an AJAX POST from a detail page for a rating score. """
 
@@ -90,6 +91,7 @@ def rate(request, id):
             return HttpResponse(status=500)
 
 @login_required
+@never_cache
 def judgerate(request, id):
     """ Handler for an AJAX POST from a detail page for a rating score. """
     judge = request.user.groups.filter(name='judges').exists()
@@ -105,6 +107,7 @@ def judgerate(request, id):
         return HttpResponse(status=500)
 
 @login_required
+@never_cache
 def judgenote(request):
     """ Handler for an AJAX POST from a detail page for a rating score. """
     user = request.user
