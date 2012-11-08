@@ -272,7 +272,7 @@ a.submission.home {
 }
 
 img.screenshot {
-    max-width: 580px;
+    max-width: 100%;
 }
 
 img.screenshot.tn {
