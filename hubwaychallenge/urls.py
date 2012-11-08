@@ -41,7 +41,8 @@ urlpatterns = patterns('',
     url(r'^data-api/$', 'hubwaychallenge.views.data_api', name='data-api'),
 
     (r'^submission/', include('submission.urls')), 
-
+    # leaderboard shortcut
+    (r'^leaderboard/', redirect_to, {'url': '/submission/leaderboard/'}),
 )
 
 if settings.DEBUG:
