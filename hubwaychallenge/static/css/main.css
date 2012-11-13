@@ -282,6 +282,12 @@ img.screenshot.tn {
     margin-right: 20px;
 }
 
+.award-ribbon {
+    position: absolute;
+    border: 0;
+}
+
+
 ul.navigation {
     padding-left: 0px;
     margin-top: 0px;
@@ -365,6 +371,15 @@ ul.leaderboard {
     background-color: rgba(255, 255, 255, 0.8);
     width: 100%;
     text-align: center;
+}
+
+.award.leaderboard li {
+    cursor: default;
+}
+
+.award a.category {
+    color: #4d4d4d;
+    font-weight: 900;
 }
 
 /*** Media Queries ***/

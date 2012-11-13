@@ -47,7 +47,7 @@
     {% if entry.approved or user.is_staff %}
     <article>
         <section class="detail">
-            <p><a href="{{ entry.screenshot.url }}" class="lightbox" title="{{ entry.description }}"><img class="screenshot" src="{{ entry.thumbnail_url }}"></a></p>
+            <p>{% if award %}<img class="award-ribbon" src="{{ award.ribbon.url }}" alt="{{ award.category }}">{% endif %}<a href="{{ entry.screenshot.url }}" class="lightbox" title="{{ entry.description }}"><img class="screenshot" src="{{ entry.thumbnail_url }}"></a></p>
             <p>By <span class="highgreen">{{ entry.name }}</p>
             {% if entry.description %}<p>{{ entry.description|markdown:"safe" }}</p>{% endif %}
             {% if entry.url %}<p><a href="{{ entry.url }}">{{ entry.url }}</a></p>{% endif %}

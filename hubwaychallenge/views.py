@@ -6,21 +6,28 @@ from django.conf import settings
 
 from datetime import datetime
 
-from submission.models import Entry
+from submission.models import Entry, Award
 
 from tastypie.models import ApiKey
 
 def home(request):
     
-    submission_open = (datetime.now() < datetime.strptime(settings.DEADLINE_SUBMISSION, '%Y-%m-%d %H:%M'))
-    
-    if submission_open:
-        entries = Entry.objects.filter(approved=True).reverse()
-        lastentry = entries[0]
+    if datetime.now() > datetime.strptime(settings.AWARD_ANNOUNCEMENT, '%Y-%m-%d %H:%M'):
+
+        awards = Award.objects.all()
+        entries_nr = Entry.objects.count()
+
     else:
-        entries = Entry.objects.all().filter(approved=True, userrating_votes__gt=0)
-        entries = list(entries)
-        entries.sort(key=lambda x: x.userrating.get_rating(), reverse=True)
+
+        submission_open = (datetime.now() < datetime.strptime(settings.DEADLINE_SUBMISSION, '%Y-%m-%d %H:%M'))
+    
+        if submission_open:
+            entries = Entry.objects.filter(approved=True).reverse()
+            lastentry = entries[0]
+        else:
+            entries = Entry.objects.all().filter(approved=True, userrating_votes__gt=0)
+            entries = list(entries)
+            entries.sort(key=lambda x: x.userrating.get_rating(), reverse=True)
     
     return render_to_response('index.html', locals(), context_instance=RequestContext(request))
 

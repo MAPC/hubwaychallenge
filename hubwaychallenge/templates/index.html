@@ -45,6 +45,17 @@
         </ul>
         <p>To celebrate the release of comprehensive user data, Hubway and MAPC are inviting you to <span class="highgreen">visualize half a million Hubway rides.</span></p>
     </header>
+    {% if awards %}
+    <section>
+      <h2>Challenge Winners</h2>
+      <ul class="award leaderboard">
+        {% for award in awards %}
+        <li style="background-image:url('{{ award.entry.thumbnail_url }}');"><div class="text"><a href="{{ award.entry.get_absolute_url }}" title="{{ award.entry.description }}" class="category">{{ award.category }}:</a> <a href="{{ award.entry.get_absolute_url }}" title="{{ award.entry.description }}" class="highgreen">{{ award.entry.name }}</a></div></li>
+        {% endfor %}
+      </ul>
+      <p><a href="{% url leaderboard %}" class="highgreen">View all {{ entries_nr }} visualizations!</a></p>
+    </section>
+    {% else %}
     {% if submission_open %}<section>
         <h2>How to Submit</h2>
         <p><a class="submission home" href="{% url add-entry %}">Submit your Data Viz!</a></p>
@@ -60,6 +71,7 @@
       <p><span class="highgreen">Tuesday November 13<sup>th</sup> 2012, 5:30 - 6:30pm</span><br>at the Bocoup Loft, 355 Congress Street, Boston</p>
       <p>Afterwards we'll celebrate downstairs at Lucky's with appetizers and a cash bar.</p>
       <p><a href="https://events.r20.constantcontact.com/register/eventReg?oeidk=a07e6kyf8xq968bc30d" title="RSVP here" class="highgreen">RSVP now!</a></p>
+      <p>...or watch the livestream on <a href="https://plus.google.com/events/c3rbaj9ufdtmm9g13mn1kkkckt8" class="highgreen">Google+</a></p>
     </section>
     <section>
         <h2>Top-rated visualizations</h2>
@@ -70,6 +82,8 @@
         </ul>
         <p><a href="{% url leaderboard %}" class="highgreen">View all {{ entries|length }} visualizations!</a></p>
     </section>{% endif %}
+    {% endif %}
+
     {% if lastentry %}<section>
         <h2>Last Submitted Visualization</h2>
         <p><a href="{{ lastentry.get_absolute_url }}" title="Hubway Data Visualization by {{ lastentry.name }}"><img class="screenshot tn" src="{{ lastentry.thumbnail_url }}" alt="Hubway Data Visualization by {{ lastentry.name }}"></a></p>
@@ -175,6 +189,7 @@
 
 {% block extra_script %}
 {{ block.super }}
+{% if not awards %}
 <script src="{{ STATIC_URL }}raty/js/jquery.raty.min.js"></script>
 <script>
     $(function() {
@@ -222,4 +237,5 @@
         {% endif %}
     });
 </script>
+{% endif %}
 {% endblock %}

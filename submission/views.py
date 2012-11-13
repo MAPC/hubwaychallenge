@@ -11,7 +11,7 @@ from django.db.models import Sum
 from PIL import Image
 from datetime import datetime
 
-from submission.models import Entry, JudgeNote
+from submission.models import Entry, JudgeNote, Award
 from submission.forms import EntryForm
 
 
@@ -54,12 +54,17 @@ def get_first_obj(qs):
     else:
         return False
 
-@never_cache
 def detail(request, id):
     """ Render detail page for an entry """
     entry = get_object_or_404(Entry, pk=id)
     user = request.user
     judge = user.groups.filter(name='judges').exists()
+
+    if datetime.now() > datetime.strptime(settings.AWARD_ANNOUNCEMENT, '%Y-%m-%d %H:%M'):
+        try:
+            award = Award.objects.get(entry=entry)
+        except Award.DoesNotExist:
+            award = None
 
     if judge:
         try:

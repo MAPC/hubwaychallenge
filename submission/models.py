@@ -75,10 +75,12 @@ class Award(models.Model):
 
     entry = models.ForeignKey(Entry)
     category = models.CharField(max_length=50)
+    ribbon = models.ImageField(upload_to='ribbons')
 
     class Meta:
         verbose_name = _('Award')
         verbose_name_plural = _('Awards')
+        ordering = ['id']
 
     def __unicode__(self):
         return self.category
