@@ -8,6 +8,7 @@ from djangoratings.fields import RatingField
 
 # Create your models here.
 
+
 class Entry(models.Model):
     """ A challenge submission entry. """
 
@@ -55,6 +56,7 @@ class Entry(models.Model):
         return self.userrating.get_rating()
     overall_publicrating.short_description = 'Public Rating'
 
+
 class JudgeNote(models.Model):
 
     user = models.ForeignKey(User)
@@ -67,5 +69,19 @@ class JudgeNote(models.Model):
 
     def __unicode__(self):
         return '%s for %s' % (self.user, self.entry)
+
+
+class Award(models.Model):
+
+    entry = models.ForeignKey(Entry)
+    category = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name = _('Award')
+        verbose_name_plural = _('Awards')
+
+    def __unicode__(self):
+        return self.category
+    
     
 
