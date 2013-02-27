@@ -170,3 +170,4 @@ local_settings.py
 *.dump
 */csv/*
 */media/*
+/doc/*
