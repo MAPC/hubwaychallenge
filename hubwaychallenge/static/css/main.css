@@ -382,6 +382,11 @@ ul.leaderboard {
     font-weight: 900;
 }
 
+.vimeo-video {
+    width: 100%;
+    height: 317px;
+}
+
 /*** Media Queries ***/
 
 /* Large desktop */
