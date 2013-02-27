@@ -232,7 +232,7 @@
               }
         });
         $("button.judgenote").on('click', function() {
-            $.post("{% url judgenote %}",
+            $.post("{% url "judgenote" %}",
                     {
                         {% if judgenote %}id: {{ judgenote.id }},{% endif %}
                         note: $("textarea.judgenote").val(), 

@@ -54,13 +54,13 @@
         <li style="background-image:url('{{ award.entry.thumbnail_url }}');"><div class="text"><a href="{{ award.entry.get_absolute_url }}" title="{{ award.entry.description }}" class="category">{{ award.category }}:</a> <a href="{{ award.entry.get_absolute_url }}" title="{{ award.entry.description }}" class="highgreen">{{ award.entry.name }}</a></div></li>
         {% endfor %}
       </ul>
-      <p><a href="{% url leaderboard %}" class="highgreen">View all {{ entries_nr }} visualizations!</a></p>
+      <p><a href="{% url "leaderboard" %}" class="highgreen">View all {{ entries_nr }} visualizations!</a></p>
       <p>The challenge is over, but it's never too late to have fun with data. If you come up with something cool, please send it to us at <span class="highgreen">submit[at]hubwaydatachallenge.org</span>!</p>
     </section>
     {% else %}
     {% if submission_open %}<section>
         <h2>How to Submit</h2>
-        <p><a class="submission home" href="{% url add-entry %}">Submit your Data Viz!</a></p>
+        <p><a class="submission home" href="{% url "add-entry" %}">Submit your Data Viz!</a></p>
         <p>It is possible to submit more than one visualization per person or team.</p>
     </section>
     <section>
@@ -79,10 +79,10 @@
         <h2>Top-rated visualizations</h2>
         <ul class="leaderboard">
             {% for entry in entries %}
-            {% if forloop.counter0 < 3 %}<li data-rating="{{ entry.userrating.get_rating }}" style="background-image:url('{{ entry.thumbnail_url }}')"><div class="text">By <a href="{% url leaderboard %}" title="{{ entry.description }}" class="highgreen">{{ entry.name }}</a><br> <span class="stars"></span></div></li>{% endif %}
+            {% if forloop.counter0 < 3 %}<li data-rating="{{ entry.userrating.get_rating }}" style="background-image:url('{{ entry.thumbnail_url }}')"><div class="text">By <a href="{% url "leaderboard" %}" title="{{ entry.description }}" class="highgreen">{{ entry.name }}</a><br> <span class="stars"></span></div></li>{% endif %}
             {% endfor %}
         </ul>
-        <p><a href="{% url leaderboard %}" class="highgreen">View all {{ entries|length }} visualizations!</a></p>
+        <p><a href="{% url "leaderboard" %}" class="highgreen">View all {{ entries|length }} visualizations!</a></p>
     </section>{% endif %}
     {% endif %}
 
@@ -117,7 +117,7 @@
 
 <aside>
     <h3>What are the data?</h3>
-    <p><a class="btn dl" title="13MB, trips and stations as CSV and Shapefile." href="http://files.hubwaydatachallenge.org/stations_trips.zip"> Download the Data </a><span class="help-text">10MB zipped CSV files and Shapefile, or {% if user.is_authenticated %}use{% else %}<a href="/register">register</a> to use{% endif %} our <a class="highgreen" href="{% if user.is_authenticated %}{% url data-api %}{% else %}/register{% endif %}" title="Data API">Data API</a>.</span></p>
+    <p><a class="btn dl" title="13MB, trips and stations as CSV and Shapefile." href="http://files.hubwaydatachallenge.org/stations_trips.zip"> Download the Data </a><span class="help-text">10MB zipped CSV files and Shapefile, or {% if user.is_authenticated %}use{% else %}<a href="/register">register</a> to use{% endif %} our <a class="highgreen" href="{% if user.is_authenticated %}{% url "data-api" %}{% else %}/register{% endif %}" title="Data API">Data API</a>.</span></p>
     <p>The <a href="/trip-history-data/" title="Hubway trip history data">Hubway trip history data</a> include every trip ever taken – with date, time, origin and destination stations, plus the bike number and more.</p>
     <h3>Updates</h3>
     <ul>
@@ -233,7 +233,7 @@
                 path: "{{ STATIC_URL }}raty/img"
             });
             $(this).on('click', function() {
-                window.location = "{% url leaderboard %}"
+                window.location = "{% url "leaderboard" %}"
             })
         });
         {% endif %}

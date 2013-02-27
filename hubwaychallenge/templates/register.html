@@ -12,15 +12,15 @@
     	<section>
     		<h2>Register</h2>
     		<p>Register with your existing account on one of the sites below:</p>
-    		<p><a class="btn-auth btn-facebook" href="{% url socialauth_begin 'facebook' %}">Sign in with <b>Facebook</b></a></p>
-            <p><a class="btn-auth btn-twitter" href="{% url socialauth_begin 'twitter' %}">Sign in with <b>Twitter</b></a></p>
-            <p><a class="btn-auth btn-google" href="{% url socialauth_begin 'google-oauth2' %}">Sign in with <b>Google</b></a></p>
-            <p><a class="btn-auth btn-github" href="{% url socialauth_begin 'github' %}">Sign in with <b>GitHub</b></a></p>
+    		<p><a class="btn-auth btn-facebook" href="{% url "socialauth_begin" 'facebook' %}">Sign in with <b>Facebook</b></a></p>
+            <p><a class="btn-auth btn-twitter" href="{% url "socialauth_begin" 'twitter' %}">Sign in with <b>Twitter</b></a></p>
+            <p><a class="btn-auth btn-google" href="{% url "socialauth_begin" 'google-oauth2' %}">Sign in with <b>Google</b></a></p>
+            <p><a class="btn-auth btn-github" href="{% url "socialauth_begin" 'github' %}">Sign in with <b>GitHub</b></a></p>
     	</section>
     </article>
     <aside>
 	    <h3>Get started!</h3>
-	    <p><a class="btn dl" title="13MB, trips and stations as CSV and Shapefile." href="http://files.hubwaydatachallenge.org/stations_trips.zip"> Download the Data </a><span class="help-text">10MB zipped CSV files and Shapefile, or {% if user.is_authenticated %}use{% else %}<a href="/register">register</a> to use{% endif %} our <a class="highgreen" href="{% if user.is_authenticated %}{% url data-api %}{% else %}/register{% endif %}" title="Data API">Data API</a>.</span></p>
+	    <p><a class="btn dl" title="13MB, trips and stations as CSV and Shapefile." href="http://files.hubwaydatachallenge.org/stations_trips.zip"> Download the Data </a><span class="help-text">10MB zipped CSV files and Shapefile, or {% if user.is_authenticated %}use{% else %}<a href="/register">register</a> to use{% endif %} our <a class="highgreen" href="{% if user.is_authenticated %}{% url "data-api" %}{% else %}/register{% endif %}" title="Data API">Data API</a>.</span></p>
         <h3>Updates</h3>
         <ul>
           <li>An aggregated rebalancing data sample, Apr - Sep 2012: <a href="http://files.hubwaydatachallenge.org/rebalancing.csv">download CSV</a></li>
